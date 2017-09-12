@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head></head>
+    <body>
+
+<input type="file" id="fileinput" onchange="handleFileSelect(this.files)"   multiple>
+<script type="text/javascript">
+function handleFileSelect(evt) {
+     var files = document.getElementById('fileinput').files;
+     if (!files.length) {
+       alert('Please select a file!');
+       return;
+     }
+
+     var fileBytes;
+     var file = files[0];
+     var reader = new FileReader();
+     reader.onloadend = function(evt) {
+         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+             fileBytes = evt.target.result;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST','/ipfs/hero',true);
+            xhr.onreadystatechange = function  () {
+                if (xhr.readyState ==4){
+                  alert(xhr.getResponseHeader('ipfs-hash'));
+                }
+            };
+            xhr.send(fileBytes)
+         }
+     };
+     reader.readAsArrayBuffer(file);
+ }
+
+</script>
+
+
+
+
+
+    </body>
+</html>

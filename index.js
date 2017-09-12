@@ -31,31 +31,38 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.raw({ type: 'application/raw'}));
+
+
 app.use('/hero', express.static('./', {
   maxAge: 0,
 }));
-function crosEnd(res){
+function cros(res){
   res.header('Access-Control-Allow-Origin','*');
   res.header('Access-Control-Allow-Methods','*');
   res.header('Access-Control-Allow-Headers','X-PINGOTHER, Content-Type');
   res.end();
 }
 app.use('/isHeroNode',function(req,res,next){
+  cros(res);
   res.send({isHeroNode:true});
-  crosEnd(res);
+  res.end();
 });
 
 app.use('/heroNodes',function(req,res,next){
+  cros(res);
   res.send(heroNodes);
-  crosEnd(res);
+  res.end();
 });
 app.use('/ipfsNodes',function(req,res,next){
+  cros(res);
   res.send(ipfsNodes);
-  crosEnd(res);
+  res.end();
 });
 app.use('/ipfsNodes',function(req,res,next){
+  cros(res);
   res.send(ipfsNodes);
-  crosEnd(res);
+  res.end();
 });
 app.use('/qr',function(req,res,next){
   var code = qr.image(req.query.value, { type: 'png' });
@@ -64,12 +71,14 @@ app.use('/qr',function(req,res,next){
 });
 app.use('/json2hash',function(req,res,next){
   if (req.method === 'POST') {
+      cros(res);
       res.send(req.body);
-      crosEnd(res);
+      res.end();
   }else if(req.method === 'GET'){
     ipfs.add(new Buffer(JSON.stringify(req.query))).then((hash)=>{
+      cros(res);
       res.send(hash[0].hash);
-      crosEnd(res);
+      res.end();
     })
   }
 });
@@ -81,6 +90,11 @@ var ipfsProxy = proxy('/ipfs', {
   changeOrigin: true
 });
 app.use(ipfsProxy);
+var ipfsApiProxy = proxy('/ipfsapi', {
+  target: 'http://localhost:5001',
+  changeOrigin: true
+});
+app.use(ipfsApiProxy);
 
 app.use('/eth',function(req,res,next){
   var options = {
@@ -92,11 +106,13 @@ app.use('/eth',function(req,res,next){
   };
   request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
+      cros(res);
       res.send(body);
-      crosEnd(res);
+      res.end();
     }else{
+      cros(res);
       res.send(error);
-      crosEnd(res);
+      res.end();
     }
   });
 })
