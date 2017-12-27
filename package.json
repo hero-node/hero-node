@@ -1,36 +1,44 @@
 {
-  "name": "heronode-core",
-  "version": "0.0.1",
-  "description": "雾计算时代，需要一个Hub，这就是Hero node所想做的事情",
-  "main": "index.js",
+  "name": "heornode-node",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
   "dependencies": {
-    "config": "^1.28.1",
-    "dockerode": "^2.5.3",
-    "ipfs-api": "^14.3.7",
-    "koa": "^2.4.1",
-    "lodash": "^4.17.4",
-    "moment": "^2.20.1",
-    "qr-image": "^3.2.0",
-    "request": "^2.81.0",
-    "winston": "^3.0.0-rc1"
+    "egg": "^2.0.0",
+    "egg-scripts": "^2.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.13.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^5.1.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "egg-scripts start --daemon",
+    "stop": "egg-scripts stop",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
   },
-  "keywords": [
-    "Hero",
-    "雾计算",
-    "以太坊",
-    "比特币",
-    "IPFS",
-    "ZeroNet",
-    "torrent",
-    "QTUM",
-    "NEO",
-    "SIA",
-    "FILECOIN"
-  ],
-  "author": "Heronode.io",
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "heronode.io",
   "license": "MIT"
 }
