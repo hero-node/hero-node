@@ -1,9 +1,1 @@
-'use strict';
-
-/**
- * @param {Egg.Application} app - egg application
- */
-module.exports = app => {
-  const { router, controller } = app;
-  router.get('/', controller.home.index);
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91dGVyLmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIiwic291cmNlcyI6WyJyb3V0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9
