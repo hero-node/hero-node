@@ -1,7 +1,7 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-  const controller = app.controller;
-  app.post('/upload', controller.files.upload);
-  app.get('/', controller.index.welcome);
+  app.get('/ipfs/nodes', app.controller.files.getNodesList);
+  app.post('/upload', app.controller.files.upload);
+  app.get('/', app.controller.index.welcome);
 };

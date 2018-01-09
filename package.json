@@ -7,7 +7,8 @@
     "egg": "^2.0.0",
     "egg-scripts": "^2.1.0",
     "ipfs-api": "^17.2.6",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.91",
