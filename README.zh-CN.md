@@ -1,12 +1,17 @@
 # heornode-node
 
+## 项目介绍
 
+`Hero Node` 是一个跨公链、跨平台的 DApp 开发平台与解决方案。
+`Hero Node` 利⽤ `Hero` 协议，将各个公链进⾏整合，致⼒于构建⼀个跨公链、跨平台的 DApp 开发平台与解决⽅案。
 
-## 快速入门
+基于 `Hero` 平台，开发者本⾝并不需要对区块链底层结构、移动端开发语⾔有所了解，便可以轻易构建出⼀个去中⼼化的、基于量⼦链、以太坊、IPFS 亦或是其他公链的 DApp，并且使⽤同⼀套⽅案构建出功能完善的 DApp，可以⽆缝运⾏在 iOS、Android 和 HTML5 等终端平台之上。
 
-<!-- 在此次添加使用文档 -->
+`Hero` 旨在建⽴⼀个更简单统⼀的区块链⽣态系统，创造⼀个新的、分布式的区块链形态，将完全颠覆现有的 DApp 开发模式，成为未来区块开发应⽤的新形式。
 
-如需进一步了解，参见 [egg 文档][egg]。
+更多信息，请访问官网 [heronode.io](https://heronode.io)
+
+## 开发和部署
 
 ### 本地开发
 
@@ -22,18 +27,3 @@ $ open http://localhost:7001/
 $ npm start
 $ npm stop
 ```
-
-### 单元测试
-
-- [egg-bin] 内置了 [mocha], [thunk-mocha], [power-assert], [istanbul] 等框架，让你可以专注于写单元测试，无需理会配套工具。
-- 断言库非常推荐使用 [power-assert]。
-- 具体参见 [egg 文档 - 单元测试](https://eggjs.org/zh-cn/core/unittest)。
-
-### 内置指令
-
-- 使用 `npm run lint` 来做代码风格检查。
-- 使用 `npm test` 来执行单元测试。
-- 使用 `npm run autod` 来自动检测依赖更新，详细参见 [autod](https://www.npmjs.com/package/autod) 。
-
-
-[egg]: https://eggjs.org

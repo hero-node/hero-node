@@ -1,12 +1,17 @@
 # heornode-node
 
+## Intro
 
+`Hero Node` is a cross-public-blockchain and cross-platform DApp development platform and solutions.
+`Hero Node` use `Hero` protocol to reorganize kinds of public blockchain, and devote to build a cross-public-blockchain and cross-platform DApp development platform and solutions.
 
-## QuickStart
+Based on `Hero` platform, developers can create a decentralized DApp established on Qtum, Ether, IPFS or other public blockchain platforms but without learning neither the infrastucture of blockchain nor the languages for developing mobile apps. Also, the DApp could runnning on iOS, Android or HTML5 client and ignore the difference of platforms.
 
-<!-- add docs here for user -->
+`Hero` focus on building a unified blockchain developing eco-system and create a brand new, distributed blockchain form that will completely changed the existing DApp development flow and become the future of cornerstone of blockchain development.
 
-see [egg docs][egg] for more detail.
+For more infomation, please visit out website [heronode.io](https://heronode.io)
+
+## Development and Deploy
 
 ### Development
 
@@ -22,12 +27,3 @@ $ open http://localhost:7001/
 $ npm start
 $ npm stop
 ```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
