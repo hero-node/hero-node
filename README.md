@@ -1,5 +1,7 @@
 # heornode-node
 
+[中文版本](https://github.com/hero-mobile/hero-node/blob/master/README.zh-CN.md)
+
 ## Intro
 
 `Hero Node` is a cross-public-blockchain and cross-platform DApp development platform and solutions.

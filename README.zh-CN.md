@@ -1,5 +1,7 @@
 # heornode-node
 
+[English version](https://github.com/hero-mobile/hero-node/blob/master/README.md)
+
 ## 项目介绍
 
 `Hero Node` 是一个跨公链、跨平台的 DApp 开发平台与解决方案。
