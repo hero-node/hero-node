@@ -6,7 +6,9 @@ export default class IndexController extends Controller {
   }
 
   public async generateQrImg() {
-    const payload: string = this.ctx.query as string;
+    const payload: string = this.ctx.query.payload as string;
     const imgStream = this.ctx.service.misc.qr.genImgByText(payload);
+    this.ctx.set('Content-type', 'image/png');
+    this.ctx.body = imgStream;
   }
 }
