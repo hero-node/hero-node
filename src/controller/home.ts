@@ -1,6 +1,11 @@
 import { Controller } from 'egg';
 
-export default class IndexController extends Controller {
+export interface IHomeController {
+  welcome: () => void;
+  generateQrImg: () => void;
+}
+
+export default class HomeController extends Controller {
   public async welcome() {
     this.ctx.body = 'Welcome to Hero Node!';
   }

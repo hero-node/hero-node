@@ -1,9 +1,9 @@
-import FileController from './files';
-import IndexController from './index';
+import { IFileController } from './files';
+import { IHomeController } from './home';
 
 declare module 'egg' {
   export interface IController {
-    files: FileController;
-    index: IndexController;
+    files: IFileController;
+    home: IHomeController;
   }
 }

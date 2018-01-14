@@ -2,7 +2,13 @@ import { Controller } from 'egg';
 import * as _ from 'lodash';
 import { IPeer } from '../service/storage/files';
 
-export default class FileController extends Controller {
+export interface IFileController {
+  upload: () => void;
+  getNodesList: () => void;
+}
+
+export default class FileController extends Controller
+  implements IFileController {
   private DEFAULT_PEER_COUNT = 10;
 
   public async upload() {
