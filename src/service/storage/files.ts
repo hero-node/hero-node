@@ -18,9 +18,9 @@ export default class FileService extends Service {
   constructor(ctx: Context) {
     super(ctx);
     this.ipfs = IPFS({
-      host: 'localhost',
-      port: '25001',
-      protocol: 'http',
+      host: this.config.ipfs.host,
+      port: this.config.ipfs.port,
+      protocol: this.config.ipfs.protocol,
     });
   }
 
