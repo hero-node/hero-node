@@ -15,5 +15,10 @@ module.exports = appInfo => {
     protocol: 'http',
   };
 
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,POST,PUT',
+  };
+
   return config;
 };
