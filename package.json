@@ -15,14 +15,10 @@
   "devDependencies": {
     "@types/lodash": "^4.14.91",
     "@types/node": "^8.5.2",
-    "autod": "^3.0.1",
-    "autod-egg": "^1.0.0",
     "cz-conventional-changelog": "^2.1.0",
     "egg-bin": "^4.3.5",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.13.0",
-    "eslint": "^4.11.0",
-    "eslint-config-egg": "^5.1.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2",
     "webstorm-disable-index": "^1.2.0"
@@ -39,16 +35,15 @@
     "test": "npm run tsc && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "lint": "eslint .",
-    "ci": "npm run lint && npm run cov",
-    "autod": "autod"
+    "lint": "tslint .",
+    "ci": "npm run lint && npm run cov"
   },
   "ci": {
     "version": "8"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/hero-node/hero-node"
   },
   "author": "heronode.io",
   "license": "MIT",
