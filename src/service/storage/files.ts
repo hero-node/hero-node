@@ -1,6 +1,7 @@
 import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import * as _ from 'lodash';
+import { promisify } from 'util';
 // import { promisify } from 'util';
 
 export interface IPeer {
@@ -22,6 +23,17 @@ export default class FileService extends Service {
       port: this.config.ipfs.port,
       protocol: this.config.ipfs.protocol,
     });
+  }
+
+  public async upload(data) {
+    const ipfsFileAddAsync = promisify(this.ipfs.files.add);
+    try {
+      const files = await ipfsFileAddAsync(data);
+      this.ctx.logger.debug(files);
+      return files;
+    } catch (err) {
+      this.ctx.logger.error(err);
+    }
   }
 
   public async getTopPeers(count?: number) {

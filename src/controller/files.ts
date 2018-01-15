@@ -12,8 +12,9 @@ export default class FileController extends Controller
   private DEFAULT_PEER_COUNT = 10;
 
   public async upload() {
-    this.app.logger.info('update mocker');
-    this.ctx.body = '1';
+    const stream = await this.ctx.getFileStream();
+    const result = await this.ctx.service.storage.files.upload(stream);
+    this.ctx.body = result;
   }
 
   public async getNodesList() {

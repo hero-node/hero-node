@@ -20,5 +20,11 @@ module.exports = appInfo => {
     allowMethods: 'GET,POST,PUT',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
   return config;
 };
