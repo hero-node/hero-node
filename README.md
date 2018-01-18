@@ -1,5 +1,6 @@
 # heornode-node
 
+[![Travis](https://img.shields.io/travis/hero-node/hero-node.svg?style=flat-square)](https://travis-ci.org/hero-node/hero-node)
 [中文版本](https://github.com/hero-mobile/hero-node/blob/master/README.zh-CN.md)
 
 ## Intro
