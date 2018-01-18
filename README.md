@@ -1,6 +1,9 @@
 # heornode-node
 
 [![Travis](https://img.shields.io/travis/hero-node/hero-node.svg?style=flat-square)](https://travis-ci.org/hero-node/hero-node)
+[![node](https://img.shields.io/node/v/heornode-node.svg?style=flat-square)](https://www.npmjs.com/package/heornode-node)
+[![npm](https://img.shields.io/npm/v/heornode-node.svg?style=flat-square)](https://www.npmjs.com/package/heornode-node)
+
 [中文版本](https://github.com/hero-mobile/hero-node/blob/master/README.zh-CN.md)
 
 ## Intro

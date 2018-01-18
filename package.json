@@ -2,7 +2,6 @@
   "name": "heornode-node",
   "version": "1.0.0",
   "description": "",
-  "private": true,
   "dependencies": {
     "egg": "^2.0.0",
     "egg-cors": "^2.0.0",
