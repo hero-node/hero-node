@@ -2,13 +2,14 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
-export interface IIpfsService {
+export interface IIpfsNodeMiscService {
   getId: () => any;
   getVersion: () => any;
   getDns: () => any;
 }
 
-export class IpfsService extends Service implements IIpfsService {
+export class IpfsNodeMiscService extends Service
+  implements IIpfsNodeMiscService {
   private ipfs: any;
 
   constructor(ctx: Context) {
