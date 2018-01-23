@@ -35,7 +35,18 @@ export default class IpfsNetworkSwarmService extends Service
     }
   }
 
-  public async connect(addr: string) {}
+  public async connect(addr: string) {
+    try {
+      const connectAsync = promisify(this.ipfs.swarm.connect);
+      const result = await connectAsync(addr);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return null;
+    }
+  }
+
   public async disconnect(addr: string) {}
   public async peers(options?: any) {}
 }
