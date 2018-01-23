@@ -59,5 +59,15 @@ export default class IpfsNetworkSwarmService extends Service
     }
   }
 
-  public async peers(options?: any) {}
+  public async peers(options?: any) {
+    try {
+      const peersAsync = promisify(this.ipfs.swarm.peers);
+      const peersList = await peersAsync(options);
+      this.ctx.logger.debug(peersList);
+      return peersList;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return null;
+    }
+  }
 }
