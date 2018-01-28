@@ -2,7 +2,11 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
-export interface IIpfsNodeStatService {}
+export interface IIpfsNodeStatService {
+  bitswap: () => Promise<any>;
+  bw: (options: any) => Promise<any>;
+  stat: (options: any) => Promise<any>;
+}
 
 export default class IpfsNodeStatService extends Service
   implements IIpfsNodeStatService {
