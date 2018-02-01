@@ -33,4 +33,16 @@ export default class IpfsNodeStatService extends Service
       return;
     }
   }
+
+  public async bw(options: any): Promise<any> {
+    const getBw = promisify(this.ipfs.bw);
+    try {
+      const result = getBw(options);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
