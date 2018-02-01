@@ -21,4 +21,16 @@ export default class IpfsNodeStatService extends Service
       });
     }
   }
+
+  public async bitswap(): Promise<any> {
+    const getIpfsNodeBitswap = promisify(this.ipfs.bitswap);
+    try {
+      const bitswap = getIpfsNodeBitswap();
+      this.ctx.logger.debug(bitswap);
+      return bitswap;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
