@@ -1,4 +1,4 @@
-# heornode-node
+# heronode-node
 
 [![Travis](https://img.shields.io/travis/hero-node/hero-node.svg?style=flat-square)](https://travis-ci.org/hero-node/hero-node)
 [![node](https://img.shields.io/node/v/heornode-node.svg?style=flat-square)](https://www.npmjs.com/package/heornode-node)
