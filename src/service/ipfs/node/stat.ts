@@ -45,4 +45,16 @@ export default class IpfsNodeStatService extends Service
       return;
     }
   }
+
+  public async stat(options: any): Promise<any> {
+    const getStat = promisify(this.ipfs.stat);
+    try {
+      const result = getStat(options);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
