@@ -4,6 +4,7 @@ import { promisify } from 'util';
 
 export interface IIpfsFilesFilesService {
   add: (data, options?) => Promise<any>;
+  cat: (path) => Promise<any>;
 }
 
 export default class IpfsNetworkBootstrapService extends Service
@@ -28,7 +29,19 @@ export default class IpfsNetworkBootstrapService extends Service
       return res;
     } catch (err) {
       this.ctx.logger.warn(err);
-      return null;
+      return;
+    }
+  }
+
+  public async cat(path): Promise<any> {
+    try {
+      const catSync = promisify(this.ipfs.files.files.cat);
+      const res = await catSync(path);
+      this.ctx.logger.debug(res);
+      return res;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
     }
   }
 }
