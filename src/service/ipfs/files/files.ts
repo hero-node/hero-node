@@ -5,6 +5,7 @@ import { promisify } from 'util';
 export interface IIpfsFilesFilesService {
   add: (data, options?) => Promise<any>;
   cat: (path) => Promise<any>;
+  get: (path) => Promise<any>;
 }
 
 export default class IpfsNetworkBootstrapService extends Service
