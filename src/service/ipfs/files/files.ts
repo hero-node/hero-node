@@ -44,4 +44,16 @@ export default class IpfsNetworkBootstrapService extends Service
       return;
     }
   }
+
+  public async get(path): Promise<any> {
+    try {
+      const getAsync = promisify(this.ipfs.files.files.get);
+      const res = await getAsync(path);
+      this.ctx.logger.debug(res);
+      return res;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
