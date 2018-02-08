@@ -8,7 +8,7 @@ export interface IIpfsFilesFilesService {
   get: (path) => Promise<any>;
 }
 
-export default class IpfsNetworkBootstrapService extends Service
+export default class IpfsFilesFilesService extends Service
   implements IIpfsFilesFilesService {
   private ipfs: any;
   constructor(ctx: Context) {
