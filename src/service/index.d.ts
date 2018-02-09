@@ -5,10 +5,16 @@ import { IIpfsNetworkSwarmService } from './ipfs/network/swarm';
 import { IIpfsNodeConfigService } from './ipfs/node/config';
 import { IIpfsNodeMiscService } from './ipfs/node/misc';
 import { IIpfsNodeStatService } from './ipfs/node/stat';
+import { IIpfsFilesFilesService } from './ipfs/files/files';
+import { IIpfsFilesBlockService } from './ipfs/files/block';
 
 declare module 'egg' {
   export interface IService {
     ipfs: {
+      files: {
+        block: IIpfsFilesBlockService;
+        files: IIpfsFilesFilesService;
+      };
       network: {
         bootstrap: IIpfsNetworkBootstrapService;
         swarm: IIpfsNetworkSwarmService;
