@@ -31,4 +31,16 @@ export default class IpfsFilesBlockService extends Service
       return;
     }
   }
+
+  public async put(block, options?): Promise<any> {
+    try {
+      const putSync = promisify(this.ipfs.blcok.put);
+      const res = await putSync(block, options);
+      this.ctx.logger.debug(res);
+      return res;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
