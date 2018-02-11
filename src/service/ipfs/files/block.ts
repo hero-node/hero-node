@@ -5,6 +5,7 @@ import { promisify } from 'util';
 export interface IIpfsFilesBlockService {
   get: (cid) => Promise<any>;
   put: (block, options?) => Promise<any>;
+  stat: (cid) => Promise<any>;
 }
 
 export default class IpfsFilesBlockService extends Service
