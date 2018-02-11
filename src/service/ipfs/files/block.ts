@@ -44,4 +44,16 @@ export default class IpfsFilesBlockService extends Service
       return;
     }
   }
+
+  public async stat(cid): Promise<any> {
+    try {
+      const statSync = promisify(this.ipfs.blcok.stat);
+      const res = await statSync(cid);
+      this.ctx.logger.debug(res);
+      return res;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
