@@ -22,7 +22,7 @@ export default class IpfsNodeRepoService extends Service
   }
 
   public async gc(options?): Promise<any> {
-    const gcAsync = promisify(this.ipfs.id);
+    const gcAsync = promisify(this.ipfs.repo.gc);
     try {
       const resp = gcAsync(options);
       this.ctx.logger.debug(resp);
