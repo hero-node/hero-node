@@ -44,4 +44,16 @@ export default class IpfsNodeRepoService extends Service
       return null;
     }
   }
+
+  public async version(): Promise<any> {
+    const versionAsync = promisify(this.ipfs.repo.version);
+    try {
+      const result = versionAsync();
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
