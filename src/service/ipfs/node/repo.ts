@@ -5,6 +5,7 @@ import { promisify } from 'util';
 export interface IIpfsNodeRepoService {
   gc: (options?) => Promise<any>;
   stat: (options?) => Promise<any>;
+  version: () => Promise<any>;
 }
 
 export default class IpfsNodeRepoService extends Service
