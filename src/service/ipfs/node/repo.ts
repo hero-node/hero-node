@@ -30,7 +30,7 @@ export default class IpfsNodeRepoService extends Service
       return resp;
     } catch (err) {
       this.ctx.logger.warn(err);
-      return null;
+      return;
     }
   }
 
@@ -42,7 +42,7 @@ export default class IpfsNodeRepoService extends Service
       return result;
     } catch (err) {
       this.ctx.logger.warn(err);
-      return null;
+      return;
     }
   }
 
