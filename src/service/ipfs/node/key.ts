@@ -2,7 +2,9 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
-export interface IIpfsNodeKeyService {}
+export interface IIpfsNodeKeyService {
+  gen: (name, options?) => Promise<any>;
+}
 
 export default class IpfsNodeKeyService extends Service
   implements IIpfsNodeKeyService {
