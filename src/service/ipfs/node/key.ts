@@ -17,4 +17,16 @@ export default class IpfsNodeKeyService extends Service
       });
     }
   }
+
+  public async gen(name: string, options?: any): Promise<any> {
+    const genAsync = promisify(this.ipfs.key.gen);
+    try {
+      const result = genAsync(name, options);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
