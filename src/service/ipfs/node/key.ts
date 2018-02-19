@@ -1,6 +1,6 @@
-import { Context, Service } from 'egg';
-import * as IPFS from 'ipfs-api';
-import { promisify } from 'util';
+import { Context, Service } from "egg";
+import * as IPFS from "ipfs-api";
+import { promisify } from "util";
 
 export interface IIpfsNodeKeyService {
   gen: (name, options?) => Promise<any>;
@@ -15,7 +15,7 @@ export default class IpfsNodeKeyService extends Service
       this.ipfs = IPFS({
         host: this.config.ipfs.host,
         port: this.config.ipfs.port,
-        protocol: this.config.ipfs.protocol,
+        protocol: this.config.ipfs.protocol
       });
     }
   }
@@ -24,6 +24,18 @@ export default class IpfsNodeKeyService extends Service
     const genAsync = promisify(this.ipfs.key.gen);
     try {
       const result = genAsync(name, options);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
+
+  public async list(options?: any): Promise<any> {
+    const listAsync = promisify(this.ipfs.key.list);
+    try {
+      const result = listAsync(options);
       this.ctx.logger.debug(result);
       return result;
     } catch (err) {
