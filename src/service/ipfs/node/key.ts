@@ -4,6 +4,7 @@ import { promisify } from "util";
 
 export interface IIpfsNodeKeyService {
   gen: (name, options?) => Promise<any>;
+  list: (options?) => Promise<any>;
 }
 
 export default class IpfsNodeKeyService extends Service
