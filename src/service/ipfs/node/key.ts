@@ -1,6 +1,6 @@
-import { Context, Service } from "egg";
-import * as IPFS from "ipfs-api";
-import { promisify } from "util";
+import { Context, Service } from 'egg';
+import * as IPFS from 'ipfs-api';
+import { promisify } from 'util';
 
 export interface IIpfsNodeKeyService {
   gen: (name, options?) => Promise<any>;
@@ -16,7 +16,7 @@ export default class IpfsNodeKeyService extends Service
       this.ipfs = IPFS({
         host: this.config.ipfs.host,
         port: this.config.ipfs.port,
-        protocol: this.config.ipfs.protocol
+        protocol: this.config.ipfs.protocol,
       });
     }
   }
