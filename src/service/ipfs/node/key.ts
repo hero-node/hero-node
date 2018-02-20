@@ -44,4 +44,16 @@ export default class IpfsNodeKeyService extends Service
       return;
     }
   }
+
+  public async rm(name: string): Promise<any> {
+    const rmAsync = promisify(this.ipfs.key.rm);
+    try {
+      const result = rmAsync(name);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
