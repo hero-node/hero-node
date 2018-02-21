@@ -57,4 +57,16 @@ export default class IpfsNodeKeyService extends Service
       return;
     }
   }
+
+  public async rename(oldName: string, newName: string): Promise<any> {
+    const rnameAsync = promisify(this.ipfs.key.rm);
+    try {
+      const result = rnameAsync(newName, newName);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
