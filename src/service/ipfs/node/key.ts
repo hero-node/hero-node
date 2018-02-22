@@ -62,7 +62,7 @@ export default class IpfsNodeKeyService extends Service
   public async rename(oldName: string, newName: string): Promise<any> {
     const rnameAsync = promisify(this.ipfs.key.rm);
     try {
-      const result = rnameAsync(newName, newName);
+      const result = rnameAsync(oldName, newName);
       this.ctx.logger.debug(result);
       return result;
     } catch (err) {
