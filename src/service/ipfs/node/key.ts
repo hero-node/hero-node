@@ -70,4 +70,16 @@ export default class IpfsNodeKeyService extends Service
       return;
     }
   }
+
+  public async export(name: string, password: string): Promise<any> {
+    const exportAsync = promisify(this.ipfs.key.export);
+    try {
+      const result = exportAsync(name, password);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
