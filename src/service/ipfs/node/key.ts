@@ -8,6 +8,7 @@ export interface IIpfsNodeKeyService {
   rm: (name) => Promise<any>;
   rename: (oldName, newName) => Promise<any>;
   export: (name, password) => Promise<any>;
+  import: (name, pem, password) => Promise<any>;
 }
 
 export default class IpfsNodeKeyService extends Service
