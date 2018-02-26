@@ -1,12 +1,14 @@
 import { FileService } from './storage/files';
 import { QRService } from './misc/qr';
+import { IIpfsFilesBlockService } from './ipfs/files/block';
+import { IIpfsFilesFilesService } from './ipfs/files/files';
 import { IIpfsNetworkBootstrapService } from './ipfs/network/bootstrap';
 import { IIpfsNetworkSwarmService } from './ipfs/network/swarm';
 import { IIpfsNodeConfigService } from './ipfs/node/config';
+import { IIpfsNodeKeyService } from './ipfs/node/key';
 import { IIpfsNodeMiscService } from './ipfs/node/misc';
+import { IIpfsNodeRepoService } from './ipfs/node/repo';
 import { IIpfsNodeStatService } from './ipfs/node/stat';
-import { IIpfsFilesFilesService } from './ipfs/files/files';
-import { IIpfsFilesBlockService } from './ipfs/files/block';
 
 declare module 'egg' {
   export interface IService {
@@ -20,8 +22,10 @@ declare module 'egg' {
         swarm: IIpfsNetworkSwarmService;
       };
       node: {
-        misc: IIpfsNodeMiscService;
         config: IIpfsNodeConfigService;
+        key: IIpfsNodeKeyService;
+        misc: IIpfsNodeMiscService;
+        repo: IIpfsNodeRepoService;
         stat: IIpfsNodeStatService;
       };
     };
