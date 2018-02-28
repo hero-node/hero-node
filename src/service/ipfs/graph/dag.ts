@@ -17,4 +17,16 @@ export default class IpfsGraphDagService extends Service
       });
     }
   }
+
+  public async put(dagNode: any, options: any): Promise<any> {
+    const putAsync = promisify(this.ipfs.graph.dag.put);
+    try {
+      const result = putAsync(dagNode, options);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
