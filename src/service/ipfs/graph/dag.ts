@@ -2,7 +2,9 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
-export interface IIpfsGraphDagService {}
+export interface IIpfsGraphDagService {
+  put(dagNode: any, options: any): Promise<any>;
+}
 
 export default class IpfsGraphDagService extends Service
   implements IIpfsGraphDagService {
