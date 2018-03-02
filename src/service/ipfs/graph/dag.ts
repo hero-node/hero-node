@@ -44,4 +44,16 @@ export default class IpfsGraphDagService extends Service
       return;
     }
   }
+
+  public async tree(cid: string, path?: string, options?: any): Promise<any> {
+    const treeAsync = promisify(this.ipfs.graph.dag.tree);
+    try {
+      const data = treeAsync(cid, path, options);
+      this.ctx.logger.debug(data);
+      return data;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
