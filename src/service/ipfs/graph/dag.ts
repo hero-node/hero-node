@@ -5,6 +5,7 @@ import { promisify } from 'util';
 export interface IIpfsGraphDagService {
   put(dagNode: any, options: any): Promise<any>;
   get(cid: string, path?: string, options?: any): Promise<any>;
+  tree(cid: string, path?: string, options?: any): Promise<any>;
 }
 
 export default class IpfsGraphDagService extends Service
