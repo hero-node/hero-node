@@ -2,11 +2,7 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
-export interface IIpfsGraphObjectService {
-  put(dagNode: any, options: any): Promise<any>;
-  get(cid: string, path?: string, options?: any): Promise<any>;
-  tree(cid: string, path?: string, options?: any): Promise<any>;
-}
+export interface IIpfsGraphObjectService {}
 
 export default class IpfsGraphObjectService extends Service
   implements IIpfsGraphObjectService {
