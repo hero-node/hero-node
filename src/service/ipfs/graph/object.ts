@@ -17,4 +17,16 @@ export default class IpfsGraphObjectService extends Service
       });
     }
   }
+
+  public async new(template?: string): Promise<any> {
+    const newAsync = promisify(this.ipfs.graph.object.new);
+    try {
+      const result = newAsync(template);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
