@@ -3,7 +3,8 @@ import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
 export interface IIpfsGraphObjectService {
-  new (template?: string): Promise<any>;
+  new(template?: string): Promise<any>;
+  put(obj: any, options?: any): Promise<any>;
 }
 
 export default class IpfsGraphObjectService extends Service
