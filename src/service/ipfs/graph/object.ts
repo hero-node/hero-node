@@ -3,7 +3,7 @@ import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
 export interface IIpfsGraphObjectService {
-  new(template?: string): Promise<any>;
+  new (template?: string): Promise<any>;
 }
 
 export default class IpfsGraphObjectService extends Service
@@ -24,6 +24,18 @@ export default class IpfsGraphObjectService extends Service
     const newAsync = promisify(this.ipfs.graph.object.new);
     try {
       const result = newAsync(template);
+      this.ctx.logger.debug(result);
+      return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
+
+  public async put(obj: any, options?: any): Promise<any> {
+    const putAsync = promisify(this.ipfs.graph.object.put);
+    try {
+      const result = putAsync(obj, options);
       this.ctx.logger.debug(result);
       return result;
     } catch (err) {
