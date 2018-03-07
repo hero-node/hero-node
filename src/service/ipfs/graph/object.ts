@@ -2,6 +2,7 @@ import { Context, Service } from 'egg';
 import * as IPFS from 'ipfs-api';
 import { promisify } from 'util';
 
+// prettier-ignore
 export interface IIpfsGraphObjectService {
   new(template?: string): Promise<any>;
   put(obj: any, options?: any): Promise<any>;
@@ -39,6 +40,18 @@ export default class IpfsGraphObjectService extends Service
       const result = putAsync(obj, options);
       this.ctx.logger.debug(result);
       return result;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
+
+  public async get(multihash: Buffer | string, options?: any): Promise<any> {
+    const getAsync = promisify(this.ipfs.graph.object.get);
+    try {
+      const node = getAsync(multihash, options);
+      this.ctx.logger.debug(node);
+      return node;
     } catch (err) {
       this.ctx.logger.warn(err);
       return;
