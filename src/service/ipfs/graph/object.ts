@@ -6,6 +6,7 @@ import { promisify } from 'util';
 export interface IIpfsGraphObjectService {
   new(template?: string): Promise<any>;
   put(obj: any, options?: any): Promise<any>;
+  get(multihash: Buffer | string, options?: any): Promise<any>;
 }
 
 export default class IpfsGraphObjectService extends Service
