@@ -58,4 +58,16 @@ export default class IpfsGraphObjectService extends Service
       return;
     }
   }
+
+  public async data(multihash: Buffer | string, options?: any): Promise<any> {
+    const dataAsync = promisify(this.ipfs.graph.object.data);
+    try {
+      const data = await dataAsync(multihash, options);
+      this.ctx.logger.debug(data);
+      return data;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
 }
