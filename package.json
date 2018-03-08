@@ -1,0 +1,22 @@
+{
+  "name": "heronode-cli",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc -p tsconfig.json",
+    "tsw": "tsc -p tsconfig.json -w"
+  },
+  "author": "MasonZ",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.14.1",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/lodash": "^4.14.104",
+    "@types/node": "^9.4.6"
+  }
+}
