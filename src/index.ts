@@ -10,6 +10,7 @@ Program.command('add <name>')
   .action(add);
 
 Program.command('upload <file>')
+  // .option('-t --type [name]', 'select which kind of payload you want to upload')
   .description('choose file to upload')
   .action(upload);
 
