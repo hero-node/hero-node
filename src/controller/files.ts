@@ -3,7 +3,8 @@ import * as _ from 'lodash';
 import { IPeer } from '../service/storage/files';
 
 export interface IFileController {
-  upload: () => void;
+  uploadFile: () => void;
+  uploadRaw: () => Promise<any>;
   getNodesList: () => void;
 }
 
@@ -11,10 +12,24 @@ export default class FileController extends Controller
   implements IFileController {
   private DEFAULT_PEER_COUNT = 10;
 
-  public async upload() {
+  public async uploadFile() {
     const stream = await this.ctx.getFileStream();
     const result = await this.ctx.service.storage.files.upload(stream);
     this.ctx.body = result;
+  }
+
+  public async uploadRaw(): Promise<any> {
+    const body = this.ctx.request.body;
+    const content = _.get(body, 'content');
+    if (!content) {
+      this.ctx.logger.warn('body content is empty!');
+      this.ctx.status = 500;
+      this.ctx.body = 'please make sure content field is not empty';
+      return;
+    }
+    this.ctx.logger.info(`uploading content: ${content}`);
+    const resp = await this.service.storage.files.upload(Buffer.from(content));
+    this.ctx.body = resp;
   }
 
   public async getNodesList() {

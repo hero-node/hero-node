@@ -11,7 +11,7 @@ module.exports = appInfo => {
 
   config.ipfs = {
     host: 'localhost',
-    port: '25001',
+    port: '5001',
     protocol: 'http',
   };
 
