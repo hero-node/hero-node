@@ -26,6 +26,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
+    "start": "egg-scripts start --daemon",
+    "stop": "egg-scripts stop",
     "clean": "rimraf app/**/*.{js,map} test/**/*.{js,map} config/**/*.{js,map}",
     "tsc": "tsc -p tsconfig.json",
     "tsc:w": "tsc -p tsconfig.json -w",
