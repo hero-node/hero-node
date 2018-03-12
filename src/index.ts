@@ -21,4 +21,5 @@ Program.command('run')
 Program.on('--help', () => {
   helper();
 });
+
 Program.parse(process.argv);
