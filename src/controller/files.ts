@@ -32,6 +32,19 @@ export default class FileController extends Controller
     this.ctx.body = resp;
   }
 
+  public async cat(): Promise<any> {
+    const hashId = this.ctx.params.hashId;
+    if (!hashId) {
+      this.ctx.logger.warn('hashId must be provided');
+      this.ctx.status = 500;
+      this.ctx.body = 'please provide the hash id';
+      return;
+    }
+    this.ctx.logger.info(`cat content with hash: ${hashId}`);
+    const data = await this.service.storage.files.cat(hashId);
+    this.ctx.body = data;
+  }
+
   public async getNodesList() {
     const peersList = await this.ctx.service.storage.files.getTopPeers(
       this.DEFAULT_PEER_COUNT,
