@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
-import * as bodyparser from 'koa-bodyparser';
+// import * as bodyparser from 'koa-bodyparser';
+import * as body from 'koa-better-body';
 import { default as router } from './router';
 import { request } from 'urllib';
 import * as _ from 'lodash';
@@ -10,9 +11,11 @@ const server = new Koa();
 //   host: 'http://localhost:5001',
 //   match: /^\/static\//
 // }))
-server.use(bodyparser());
+server.use(body());
+// server.use(bodyparser());
 server.use(router.routes());
 server.use(router.allowedMethods());
+server.use(router.middleware());
 server.use(async (ctx, next) => {
   if (ctx.path.startsWith('/ipfs')) {
     const ipfsFileUrl = `http://localhost:8080${ctx.path}`;
