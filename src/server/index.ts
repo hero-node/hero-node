@@ -1,4 +1,5 @@
 import * as Koa from 'koa';
+import * as bodyparser from 'koa-bodyparser';
 import { default as router } from './router';
 import { request } from 'urllib';
 import * as _ from 'lodash';
@@ -9,6 +10,7 @@ const server = new Koa();
 //   host: 'http://localhost:5001',
 //   match: /^\/static\//
 // }))
+server.use(bodyparser());
 server.use(router.routes());
 server.use(router.allowedMethods());
 server.use(async (ctx, next) => {

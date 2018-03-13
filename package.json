@@ -16,7 +16,9 @@
   "dependencies": {
     "commander": "^2.14.1",
     "ipfs": "^0.28.0",
+    "ipfs-api": "^18.1.2",
     "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-proxy": "^0.9.0",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.5",
