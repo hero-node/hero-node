@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "heronode",
+      "script": "./dist/index.js",
+      "args": "run",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

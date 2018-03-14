@@ -1,4 +1,4 @@
-import { readFile, readFileSync } from 'fs';
+import { readFile } from 'fs';
 import { promisify } from 'util';
 import * as _ from 'lodash';
 
