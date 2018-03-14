@@ -1,6 +1,6 @@
 import * as Program from 'commander';
 import { default as pkgReader } from './utils/pkgReader';
-import { add, helper, server, upload } from './processor';
+import { add, helper, run, upload } from './processor';
 
 const pkgInfo = pkgReader();
 Program.version(pkgInfo.version || '1.0.0');
@@ -16,7 +16,7 @@ Program.command('upload <file>')
 
 Program.command('run')
   .description('start the heronode server')
-  .action(server);
+  .action(run);
 
 Program.on('--help', () => {
   helper();

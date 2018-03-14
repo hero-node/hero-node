@@ -1,3 +1,6 @@
+import { LoggerFactory } from '../utils/logger';
+
 export default chainname => {
-  console.log('add', chainname);
+  const logger = LoggerFactory.getLabeledInstance('processor', 'add');
+  logger.info('add', chainname);
 };
