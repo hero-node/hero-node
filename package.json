@@ -15,12 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.14.1",
-    "ipfs": "^0.28.0",
     "ipfs-api": "^18.1.2",
     "koa": "^2.5.0",
     "koa-better-body": "^3.0.4",
     "koa-bodyparser": "^4.2.0",
-    "koa-proxy": "^0.9.0",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
@@ -34,7 +32,6 @@
     "@types/koa-router": "^7.0.27",
     "@types/lodash": "^4.14.104",
     "@types/node": "^9.4.6",
-    "@types/urllib": "^2.25.0",
-    "@types/winston": "^2.3.8"
+    "@types/urllib": "^2.25.0"
   }
 }
