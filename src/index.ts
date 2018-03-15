@@ -22,4 +22,4 @@ Program.on('--help', () => {
   helper();
 });
 
-Program.parse(process.argv);
+export { Program };
