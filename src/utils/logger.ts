@@ -35,10 +35,9 @@ export class LoggerFactory {
     const identity = `${category}-${callee}`;
     let labeledInstance = this._instances.get(identity);
     if (!labeledInstance) {
-      const { printf } = format;
       labeledInstance = createLogger({
         label: callee,
-        format: printf(info => {
+        format: format.printf(info => {
           return `${moment().format('YYYY-MM-DD hh:mm:ss.SSS')} ${_.padEnd(
             info.level,
             7,

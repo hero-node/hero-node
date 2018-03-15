@@ -22,7 +22,7 @@ router.get('/', async (ctx, next) => {
 });
 
 router.post('/api/ipfs/upload/raw', async (ctx, next) => {
-  const body = ctx.request.fields;
+  const body = (ctx.request as any).fields;
   const content = _.get(body, 'content');
   if (!content) {
     logger.info('body content is empty!');
@@ -32,13 +32,18 @@ router.post('/api/ipfs/upload/raw', async (ctx, next) => {
     return;
   }
   logger.info(`uploading content: ${content}`);
-  const resp = await uploadAsync(Buffer.from(content));
-  ctx.body = resp;
+  try {
+    const resp = await uploadAsync(Buffer.from(content));
+    ctx.body = resp;
+  } catch (err) {
+    ctx.body = err;
+    ctx.status = 500;
+  }
   await next;
 });
 
 router.post('/api/ipfs/upload/file', async (ctx, next) => {
-  const body = _.head(_.values(ctx.request.fields));
+  const body = _.head(_.values((ctx.request as any).fields));
   const filePath = _.get(_.head(body), 'path');
   logger.info(`uploading content with path: ${filePath}`);
   const fileContent = await readFileAsync(filePath);

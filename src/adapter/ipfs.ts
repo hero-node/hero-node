@@ -1,4 +1,4 @@
-import * as IPFS from 'ipfs';
+import * as IPFS from 'ipfs-api';
 
 let instance;
 
