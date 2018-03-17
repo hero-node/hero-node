@@ -16,6 +16,7 @@ Program.command('upload <file>')
 
 Program.command('run')
   .description('start the heronode server')
+  .option('-p, --port <number>', 'use alternative port to run')
   .action(run);
 
 Program.on('--help', () => {
