@@ -4,7 +4,8 @@ import { LoggerFactory } from '../utils/logger';
 
 export default port => {
   const logger = LoggerFactory.getLabeledInstance('processor', 'run');
-  if (!_.isNumber(port) || port <= 0) port = 80;
+  if (!_.isNumber(+port) || port <= 0) port = 80;
+  else port = +port;
   logger.info(`server will start on port ${port}`);
   server.listen(port);
 };
