@@ -40,14 +40,16 @@ export class LoggerFactory {
     callee: string,
     options?: ILoggerInstanceOption,
   ): logger.ILoggerInstance {
-    if (!category || _.isEmpty(category)) category = 'default';
-    if (!callee || _.isEmpty(callee)) callee = 'default';
+    if (!category || _.isEmpty(category)) category = 'main';
+    if (!callee || _.isEmpty(callee)) callee = '';
+
     let colorize = true;
     if (
       _.get(options, 'env') === 'prod' ||
       _.get(options, 'colorize') === false
-    )
+    ) {
       colorize = false;
+    }
     const identity = `${category}-${callee}`;
     let labeledInstance = this._instances.get(identity);
     if (!labeledInstance) {
