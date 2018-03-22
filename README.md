@@ -1,2 +1,18 @@
-# heronode-cli
-the command line version for Heronode
+# heornode
+
+[![Travis](https://img.shields.io/travis/hero-node/hero-node.svg?style=flat-square)](https://travis-ci.org/hero-node/hero-node)
+[![node](https://img.shields.io/node/v/heornode-node.svg?style=flat-square)](https://www.npmjs.com/package/heornode-node)
+[![npm](https://img.shields.io/npm/v/heornode-node.svg?style=flat-square)](https://www.npmjs.com/package/heornode-node)
+
+[中文版本](https://github.com/hero-mobile/hero-node/blob/master/README.zh-CN.md)
+
+## Intro
+
+`Hero Node` is a cross-public-blockchain and cross-platform DApp development platform and solutions.
+`Hero Node` use `Hero` protocol to reorganize kinds of public blockchain, and devote to build a cross-public-blockchain and cross-platform DApp development platform and solutions.
+
+Based on `Hero` platform, developers can create a decentralized DApp established on Qtum, Ether, IPFS or other public blockchain platforms but without learning neither the infrastucture of blockchain nor the languages for developing mobile apps. Also, the DApp could runnning on iOS, Android or HTML5 client and ignore the difference of platforms.
+
+`Hero` focus on building a unified blockchain developing eco-system and create a brand new, distributed blockchain form that will completely changed the existing DApp development flow and become the future of cornerstone of blockchain development.
+
+For more infomation, please visit out website [heronode.io](https://heronode.io)

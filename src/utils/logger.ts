@@ -50,6 +50,7 @@ export class LoggerFactory {
     ) {
       colorize = false;
     }
+
     const identity = `${category}-${callee}`;
     let labeledInstance = this._instances.get(identity);
     if (!labeledInstance) {
