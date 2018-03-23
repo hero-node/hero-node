@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 // import * as bodyparser from 'koa-bodyparser';
 import * as body from 'koa-better-body';
+import * as cors from 'kcors';
 import { default as router } from './router';
 import { request, RequestOptions } from 'urllib';
 import * as _ from 'lodash';
@@ -13,6 +14,7 @@ const server = new Koa();
 // }))
 
 server.use(body());
+server.use(cors());
 
 server.use(async (ctx, next) => {
   if (ctx.path.startsWith('/ipfs')) {

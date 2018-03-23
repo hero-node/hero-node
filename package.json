@@ -18,6 +18,7 @@
     "commander": "^2.14.1",
     "dotenv": "^5.0.1",
     "ipfs-api": "^18.1.2",
+    "kcors": "^2.2.1",
     "koa": "^2.5.0",
     "koa-better-body": "^3.0.4",
     "koa-bodyparser": "^4.2.0",
