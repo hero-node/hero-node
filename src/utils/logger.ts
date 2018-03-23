@@ -1,4 +1,3 @@
-import * as chalk from 'chalk';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { createLogger, format, transports } from 'winston';

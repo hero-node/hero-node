@@ -25,6 +25,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
     "urllib": "^2.26.0",
+    "web3": "^1.0.0-beta.33",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {

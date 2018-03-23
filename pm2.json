@@ -2,8 +2,8 @@
   "apps": [
     {
       "name": "heronode",
-      "script": "./dist/index.js",
-      "args": "run",
+      "script": "./index.js",
+      "args": "run -p 8080",
       "env": {
         "NODE_ENV": "development"
       },
