@@ -23,7 +23,7 @@ server.use(async (ctx, next) => {
     const rawFile: Buffer = _.get(resp, 'data');
     ctx.body = rawFile.toString();
   } else if (ctx.path.startsWith('/ethzeus')) {
-    const ethWeb3ApiUrl = `http://106.14.187.240:9002`;
+    const ethWeb3ApiUrl = `http://localhost:9002`;
     const options: RequestOptions = {
       method: ctx.method,
       contentType: 'json',

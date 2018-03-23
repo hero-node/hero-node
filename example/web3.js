@@ -1,5 +1,5 @@
 const Web3 = require('web3');
-const web3 = new Web3('http://106.14.187.240/ethzeus');
+const web3 = new Web3('http://localhost:8080/ethzeus');
 
 const version = web3.version;
 console.log(version);
