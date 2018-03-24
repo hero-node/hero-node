@@ -1,3 +1,4 @@
+import { default as chalk } from 'chalk';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { createLogger, format, transports } from 'winston';
@@ -52,16 +53,18 @@ export class LoggerFactory {
 
     const identity = `${category}-${callee}`;
     let labeledInstance = this._instances.get(identity);
+
     if (!labeledInstance) {
       labeledInstance = createLogger({
         label: callee,
         format: format.printf(info => {
-          return `${moment().format('YYYY-MM-DD hh:mm:ss.SSS')} ${_.padEnd(
+          return `${moment().format('YYYY-MM-DD hh:mm:ss.SSS')} ${chalk.cyan(
             info.level,
-            7,
-          )} --- [${category}] ${callee}: ${info.message}`;
+          )} --- [${chalk.cyan(category)}:${chalk.cyan(callee)}]: ${
+            info.message
+          }`;
         }),
-        transports: [new transports.Console({ colorize: colorize })],
+        transports: [new transports.Console()],
       });
       this._instances.set(identity, labeledInstance);
     }
