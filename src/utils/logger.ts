@@ -32,6 +32,38 @@ interface ILoggerInstanceOption {
   env: string;
 }
 
+function getFormattedLevel(level: string, colorize = true) {
+  let result;
+  if (level) {
+    const text = _.toUpper(level);
+    if (!!colorize) {
+      if (text === 'INFO') {
+        result = chalk.blue(text);
+      } else if (text === 'WARN') {
+        result = chalk.yellow(text);
+      } else if (text === 'ERROR') {
+        result = chalk.red(text);
+      } else {
+        result = text;
+      }
+    }
+    result = `[${_.pad(result, 9, ' ')}]`;
+  }
+  return result;
+}
+
+function getFormattedCategory(category, colorize = true) {
+  let result;
+  if (category) {
+    if (!!colorize) {
+      result = chalk.cyan.bold(category);
+    } else {
+      result = category;
+    }
+  }
+  return result;
+}
+
 export class LoggerFactory {
   static _instances = new Map<string, logger.ILoggerInstance>();
 
@@ -43,13 +75,13 @@ export class LoggerFactory {
     if (!category || _.isEmpty(category)) category = 'main';
     if (!callee || _.isEmpty(callee)) callee = '';
 
-    // let colorize = true;
-    // if (
-    //   _.get(options, 'env') === 'prod' ||
-    //   _.get(options, 'colorize') === false
-    // ) {
-    //   colorize = false;
-    // }
+    let colorize = true;
+    if (
+      _.get(options, 'env') === 'prod' ||
+      _.get(options, 'colorize') === false
+    ) {
+      colorize = false;
+    }
 
     const identity = `${category}-${callee}`;
     let labeledInstance = this._instances.get(identity);
@@ -58,11 +90,14 @@ export class LoggerFactory {
       labeledInstance = createLogger({
         label: callee,
         format: format.printf(info => {
-          return `${moment().format('YYYY-MM-DD hh:mm:ss.SSS')} ${chalk.cyan(
+          return `${moment().format(
+            'YYYY-MM-DD hh:mm:ss.SSS',
+          )} ${getFormattedLevel(
             info.level,
-          )} --- [${chalk.cyan(category)}:${chalk.cyan(callee)}]: ${
-            info.message
-          }`;
+            colorize,
+          )} --- [${getFormattedCategory(category)}:${getFormattedCategory(
+            callee,
+          )}]: ${info.message}`;
         }),
         transports: [new transports.Console()],
       });
