@@ -40,8 +40,12 @@ server.use(async (ctx, next) => {
   } else if (ctx.path.startsWith('/ipfs')) {
     const ipfsFileUrl = `http://localhost:8080${ctx.path}`;
     logger.info(`proxy to ipfs:8080 with ${ipfsFileUrl}`);
-    const resp = await request(ipfsFileUrl, { timeout: MAX_TIMEOUT });
+    const resp = await request(ipfsFileUrl, {
+      headers: ctx.request.headers,
+      timeout: MAX_TIMEOUT,
+    });
     const rawFile: Buffer = _.get(resp, 'data');
+    ctx.set(resp.headers);
     ctx.body = rawFile.toString();
   } else if (ctx.path.startsWith('/ethzeus')) {
     const ethWeb3ApiUrl = `http://localhost:9002`;
