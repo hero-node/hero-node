@@ -5,8 +5,10 @@ import * as cors from 'kcors';
 import { default as router } from './router';
 import { request, RequestOptions } from 'urllib';
 import * as _ from 'lodash';
+import { LoggerFactory } from '../utils/logger';
 // import * as Proxy from 'koa-proxy';
 
+const logger = LoggerFactory.getLabeledInstance('server', 'index');
 const server = new Koa();
 // server.use(Proxy({
 //   host: 'http://localhost:5001',
@@ -17,8 +19,16 @@ server.use(body());
 server.use(cors());
 
 server.use(async (ctx, next) => {
-  if (ctx.path.startsWith('/ipfs')) {
+  if (ctx.path.startsWith('/ipfsapi')) {
+    const handledPath = ctx.path.replace('/ipfsapi', '');
+    const ipfsApiUrl = `http://localhost:5001${handledPath}`;
+    logger.info(`proxy to ipfs:5001 with ${ipfsApiUrl}`);
+    const resp = await request(ipfsApiUrl);
+    const data = _.get(resp, 'data').toString();
+    ctx.body = data;
+  } else if (ctx.path.startsWith('/ipfs')) {
     const ipfsFileUrl = `http://localhost:8080${ctx.path}`;
+    logger.info(`proxy to ipfs:8080 with ${ipfsFileUrl}`);
     const resp = await request(ipfsFileUrl);
     const rawFile: Buffer = _.get(resp, 'data');
     ctx.body = rawFile.toString();
