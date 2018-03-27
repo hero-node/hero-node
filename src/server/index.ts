@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { LoggerFactory } from '../utils/logger';
 // import * as Proxy from 'koa-proxy';
 
+const MAX_TIMEOUT = 300000;
 const logger = LoggerFactory.getLabeledInstance('server', 'index');
 const server = new Koa();
 // server.use(Proxy({
@@ -21,15 +22,16 @@ server.use(cors());
 server.use(async (ctx, next) => {
   if (ctx.path.startsWith('/ipfsapi')) {
     const handledPath = ctx.path.replace('/ipfsapi', '');
-    const ipfsApiUrl = `http://localhost:5001${handledPath}`;
+    const query = ctx.querystring;
+    const ipfsApiUrl = `http://localhost:5001${handledPath}?${query}`;
     logger.info(`proxy to ipfs:5001 with ${ipfsApiUrl}`);
-    const resp = await request(ipfsApiUrl);
+    const resp = await request(ipfsApiUrl, { timeout: MAX_TIMEOUT });
     const data = _.get(resp, 'data').toString();
     ctx.body = data;
   } else if (ctx.path.startsWith('/ipfs')) {
     const ipfsFileUrl = `http://localhost:8080${ctx.path}`;
     logger.info(`proxy to ipfs:8080 with ${ipfsFileUrl}`);
-    const resp = await request(ipfsFileUrl);
+    const resp = await request(ipfsFileUrl, { timeout: MAX_TIMEOUT });
     const rawFile: Buffer = _.get(resp, 'data');
     ctx.body = rawFile.toString();
   } else if (ctx.path.startsWith('/ethzeus')) {

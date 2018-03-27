@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>HeroNode - Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Demo Dependencies -->
+  <script src="Layouts%20%C2%BB%20Two-and-One_files/jquery.js" type="text/javascript"></script>
+  <script src="Layouts%20%C2%BB%20Two-and-One_files/bootstrap.js" type="text/javascript"></script>
+  <link href="Layouts%20%C2%BB%20Two-and-One_files/bootstrap.css" rel="stylesheet" type="text/css">
+
+  <!-- keen-analysis@1.2.2 -->
+  <script src="Layouts%20%C2%BB%20Two-and-One_files/keen-analysis-1.js" type="text/javascript"></script>
+
+  <!-- keen-dataviz@1.1.3 -->
+  <link href="Layouts%20%C2%BB%20Two-and-One_files/keen-dataviz-1.css" rel="stylesheet">
+  <script src="Layouts%20%C2%BB%20Two-and-One_files/keen-dataviz-1.js" type="text/javascript"></script>
+
+  <!-- Dashboard -->
+  <link rel="stylesheet" type="text/css" href="Layouts%20%C2%BB%20Two-and-One_files/keen-dashboards.css">
+</head>
+
+<body class="keen-dashboard" style="padding-top: 80px;">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://keen.github.io/dashboards/layouts/">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="navbar-brand" href="http://keen.github.io/dashboards/layouts/two-and-one/">Dashboard Starter UI</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li>
+            <a href="https://keen.io/">Home</a>
+          </li>
+          <li>
+            <a href="https://keen.io/team">Team</a>
+          </li>
+          <li>
+            <a href="https://github.com/keenlabs/dashboards/tree/gh-pages/layouts/two-and-one">Source</a>
+          </li>
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/keen-io-devs">Community</a>
+          </li>
+          <li>
+            <a href="http://stackoverflow.com/questions/tagged/keen-io?sort=newest&amp;pageSize=15">Technical Support</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Pageviews by browser (past 24 hours)
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x350/white" alt="100%x350" style="height: 350px; width: 100%; display: block;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MTMiIGhlaWdodD0iMzUwIj48cmVjdCB3aWR0aD0iNzEzIiBoZWlnaHQ9IjM1MCIgZmlsbD0iI2ZmZiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjM1Ni41IiB5PSIxNzUiIHN0eWxlPSJmaWxsOiNhN2E3YTc7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LXNpemU6NDVweDtmb250LWZhbWlseTpBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZjtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj43MTN4MzUwPC90ZXh0Pjwvc3ZnPg==">
+          </div>
+          <div class="chart-notes">
+            This is a sample text region to describe this chart.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Pageviews by browser (past 5 days)
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x350/white" alt="100%x350" style="height: 350px; width: 100%; display: block;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MTMiIGhlaWdodD0iMzUwIj48cmVjdCB3aWR0aD0iNzEzIiBoZWlnaHQ9IjM1MCIgZmlsbD0iI2ZmZiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjM1Ni41IiB5PSIxNzUiIHN0eWxlPSJmaWxsOiNhN2E3YTc7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LXNpemU6NDVweDtmb250LWZhbWlseTpBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZjtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj43MTN4MzUwPC90ZXh0Pjwvc3ZnPg==">
+          </div>
+          <div class="chart-notes">
+            Notes go down here
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="col-sm-12">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Impressions by advertiser
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x150/white" alt="100%x150" style="height: 150px; width: 100%; display: block;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDc3IiBoZWlnaHQ9IjE1MCI+PHJlY3Qgd2lkdGg9IjE0NzciIGhlaWdodD0iMTUwIiBmaWxsPSIjZmZmIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNzM4LjUiIHk9Ijc1IiBzdHlsZT0iZmlsbDojYTdhN2E3O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjkycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTQ3N3gxNTA8L3RleHQ+PC9zdmc+">
+          </div>
+          <div class="chart-notes">
+            Notes go down here
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="container-fluid">
+    <p class="small text-muted">Built with ♥ by
+      <a href="https://keen.io/">Keen IO</a>
+    </p>
+  </div>
+
+</body>
+
+</html>
