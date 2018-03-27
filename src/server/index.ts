@@ -1,15 +1,17 @@
+import { join } from 'path';
 import * as Koa from 'koa';
-// import * as bodyparser from 'koa-bodyparser';
 import * as body from 'koa-better-body';
 import * as cors from 'kcors';
+import * as view from 'koa-view';
+import * as kstatic from 'koa-static';
 import { default as router } from './router';
 import { request, RequestOptions } from 'urllib';
 import * as _ from 'lodash';
 import { LoggerFactory } from '../utils/logger';
 // import * as Proxy from 'koa-proxy';
 
-const MAX_TIMEOUT = 300000;
-const logger = LoggerFactory.getLabeledInstance('server', 'index');
+const MAX_TIMEOUT = 3000000;
+const logger = LoggerFactory.getLabeledInstance('server');
 const server = new Koa();
 // server.use(Proxy({
 //   host: 'http://localhost:5001',
@@ -18,6 +20,13 @@ const server = new Koa();
 
 server.use(body());
 server.use(cors());
+server.use(view(join(__dirname, '../..', '/public/views')));
+server.use(kstatic(join(__dirname, '../..', '/public/assets')));
+
+// server.use(bodyparser());
+server.use(router.routes());
+server.use(router.allowedMethods());
+server.use(router.middleware());
 
 server.use(async (ctx, next) => {
   if (ctx.path.startsWith('/ipfsapi')) {
@@ -47,10 +56,5 @@ server.use(async (ctx, next) => {
   }
   await next;
 });
-
-// server.use(bodyparser());
-server.use(router.routes());
-server.use(router.allowedMethods());
-server.use(router.middleware());
 
 export default server;

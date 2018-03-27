@@ -52,4 +52,8 @@ router.post('/api/ipfs/upload/file', async (ctx, next) => {
   await next;
 });
 
+router.get('/dashboard', async (ctx, next) => {
+  await ctx.render('index');
+});
+
 export default router;

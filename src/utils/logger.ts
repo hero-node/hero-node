@@ -69,7 +69,7 @@ export class LoggerFactory {
 
   static getLabeledInstance(
     category: string,
-    callee: string,
+    callee?: string,
     options?: ILoggerInstanceOption,
   ): logger.ILoggerInstance {
     if (!category || _.isEmpty(category)) category = 'main';
@@ -88,7 +88,7 @@ export class LoggerFactory {
 
     if (!labeledInstance) {
       labeledInstance = createLogger({
-        label: callee,
+        label: category,
         format: format.printf(info => {
           return `${moment().format(
             'YYYY-MM-DD hh:mm:ss.SSS',
