@@ -47,7 +47,7 @@ function getFormattedLevel(level: string, colorize = true) {
         result = text;
       }
     }
-    result = `[${_.pad(result, 9, ' ')}]`;
+    result = _.padEnd(`[${result}]`, 9, ' ');
   }
   return result;
 }
@@ -90,14 +90,16 @@ export class LoggerFactory {
       labeledInstance = createLogger({
         label: category,
         format: format.printf(info => {
+          const categoryInfo = getFormattedCategory(category);
+          const calleeInfo = getFormattedCategory(callee)
+            ? `:${getFormattedCategory(callee)}`
+            : '';
           return `${moment().format(
             'YYYY-MM-DD hh:mm:ss.SSS',
           )} ${getFormattedLevel(
             info.level,
             colorize,
-          )} --- [${getFormattedCategory(category)}:${getFormattedCategory(
-            callee,
-          )}]: ${info.message}`;
+          )} --- [${categoryInfo}${calleeInfo}]: ${info.message}`;
         }),
         transports: [new transports.Console()],
       });
