@@ -52,7 +52,7 @@ router.post('/api/ipfs/upload/file', async (ctx, next) => {
   await next;
 });
 
-router.get('/dashboard', async (ctx, next) => {
+router.get('/dashboard', async ctx => {
   await ctx.render('index');
 });
 
