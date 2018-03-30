@@ -8,6 +8,7 @@ import { default as router } from './router';
 import { request, RequestOptions } from 'urllib';
 import * as _ from 'lodash';
 import { LoggerFactory } from '../utils/logger';
+import dotenv from 'dotenv';
 // import * as Proxy from 'koa-proxy';
 
 const MAX_TIMEOUT = 3000000;
