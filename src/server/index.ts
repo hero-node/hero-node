@@ -4,9 +4,10 @@ import * as body from 'koa-better-body';
 import * as cors from 'kcors';
 import * as view from 'koa-view';
 import * as kstatic from 'koa-static';
+import * as convert from 'koa-convert';
 import { default as proxy } from './proxy';
 import { default as router } from './router';
-import { request, RequestOptions } from 'urllib';
+// import { request, RequestOptions } from 'urllib';
 import * as _ from 'lodash';
 import { LoggerFactory } from '../utils/logger';
 import dotenv from 'dotenv';
@@ -20,7 +21,7 @@ const server = new Koa();
 //   match: /^\/static\//
 // }))
 
-server.use(body());
+server.use(convert(body()));
 server.use(cors());
 server.use(view(join(__dirname, '../..', '/public/views')));
 server.use(kstatic(join(__dirname, '../..', '/public/assets')));
