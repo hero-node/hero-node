@@ -17,6 +17,7 @@
     "chalk": "^2.3.2",
     "commander": "^2.14.1",
     "dotenv": "^5.0.1",
+    "http-proxy": "^1.16.2",
     "ipfs-api": "^18.1.2",
     "kcors": "^2.2.1",
     "koa": "^2.5.0",
@@ -27,6 +28,7 @@
     "koa-view": "^2.1.1",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
+    "path-match": "^1.2.4",
     "urllib": "^2.26.0",
     "web3": "^1.0.0-beta.33",
     "winston": "^3.0.0-rc1"
