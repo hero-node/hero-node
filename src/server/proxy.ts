@@ -1,6 +1,9 @@
 import { resolve as urlResolve } from 'url';
 import * as HttpProxy from 'http-proxy';
 import * as pathMatch from 'path-match';
+import { LoggerFactory } from '../utils/logger';
+
+const logger = LoggerFactory.getLabeledInstance('server', 'proxy');
 
 const proxy = HttpProxy.createProxyServer();
 const route = pathMatch({
@@ -20,6 +23,10 @@ export default (context, options) => (ctx, next) => {
 
     if (options.rewrite && typeof options.rewrite === 'function')
       ctx.req.url = options.rewrite(ctx.req.url);
+
+    logger.info(
+      `${ctx.req.oldPath} ==> ${urlResolve(options.target, ctx.req.url)}`,
+    );
 
     proxy.web(ctx.req, ctx.res, options, e => {
       const status = {

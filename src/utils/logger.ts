@@ -47,7 +47,7 @@ function getFormattedLevel(level: string, colorize = true) {
         result = text;
       }
     }
-    result = _.padEnd(`[${result}]`, 9, ' ');
+    result = _.padEnd(`[${result}]`, 19);
   }
   return result;
 }
@@ -88,7 +88,6 @@ export class LoggerFactory {
 
     if (!labeledInstance) {
       labeledInstance = createLogger({
-        label: category,
         format: format.printf(info => {
           const categoryInfo = getFormattedCategory(category);
           const calleeInfo = getFormattedCategory(callee)
