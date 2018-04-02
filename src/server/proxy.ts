@@ -18,7 +18,7 @@ export default (context, options) => (ctx, next) => {
   const match = route(context);
   if (!match(ctx.path)) return next();
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     ctx.req.oldPath = ctx.req.url;
 
     if (options.rewrite && typeof options.rewrite === 'function')
