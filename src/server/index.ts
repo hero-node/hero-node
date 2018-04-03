@@ -53,16 +53,22 @@ server.use(router.middleware());
 //   }
 //   await next;
 // });
+
+// The proxy for ipfs files
 server.use(
   proxy('/_/ipfs/files', {
     target: 'http://localhost:8080',
     rewrite: path => path.replace(/\/_\/ipfs\/files/, '/ipfs'),
+    changeOrigin: true,
   }),
 );
+
+// The proxy for ipfs api
 server.use(
   proxy('/_/ipfs/api', {
     target: 'http://localhost:5001',
-    rewrite: path => path.replace(/\/_\/ipfs\/api/, '/'),
+    rewrite: path => path.replace(/\/_\/ipfs\/api/, ''),
+    changeOrigin: true,
   }),
 );
 

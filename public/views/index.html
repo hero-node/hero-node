@@ -86,23 +86,16 @@
 
 <script>
   $(document).ready(function () {
-    const siblingsList = $.getJSON('/ipfsapi/api/v0/swarm/peers');
-    const nodeInfo = $.getJSON('/ipfsapi/api/v0/id');
-    Promise.all([siblingsList, nodeInfo])
-      .then(function (responses) {
-        const list = responses[0].Peers;
-        const info = responses[1];
-        $('#nodeinfo_nodeid').text(info.ID);
-        $('#nodeinfo_version').text('0.1.5');
-        const formattedList = list.reduce(function (accu, item) {
-          ip = item.Addr.split('/')[2];
-          accu += '<li>'
-          accu += ip;
-          accu += '</li>'
-          return accu;
-        }, '');
-        $('#nodelist').append(formattedList);
-      });
+    const nodeInfo = $.getJSON('/internal/nodeinfo', function (resp) {
+      $('#nodeinfo_nodeid').text(resp.nodeId.id);
+      $('#nodeinfo_version').text(resp.nodeId.protocolVersion);
+      $('#nodelist').append(resp.addrs.reduce(function (accu, el) {
+        accu += '<li>';
+        accu += el;
+        accu += '</li>'
+        return accu;
+      }, ''));
+    });
   });
 </script>
 

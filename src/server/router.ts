@@ -14,6 +14,8 @@ const ipfs = IPFS({
 });
 const logger = LoggerFactory.getLabeledInstance('server', 'router');
 const uploadAsync = promisify(ipfs.files.add);
+const getIpfsNodeId = promisify(ipfs.id);
+const getIpfsSwarmPeers = promisify(ipfs.swarm.peers);
 const readFileAsync = promisify(readFile);
 
 router.get('/', async (ctx, next) => {
@@ -54,6 +56,23 @@ router.post('/api/ipfs/upload/file', async (ctx, next) => {
 
 router.get('/dashboard', async ctx => {
   await ctx.render('index');
+});
+
+router.get('/internal/nodeinfo', async ctx => {
+  const [nodeId, peers] = await Promise.all([
+    getIpfsNodeId(),
+    getIpfsSwarmPeers(),
+  ]);
+  const addrs = _.reduce(
+    peers,
+    (accu, peer) => {
+      const addrInfoArr = peer.addr.toString().split('/');
+      accu.push(addrInfoArr[2]);
+      return accu;
+    },
+    [],
+  );
+  ctx.body = { nodeId, addrs };
 });
 
 export default router;
