@@ -7,8 +7,13 @@ import * as kstatic from 'koa-static';
 import * as convert from 'koa-convert';
 import { default as proxy } from './proxy';
 import { default as router } from './router';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
+const IPFS_FILE_ENDPOINT =
+  process.env.IPFS_FILE_ENDPOINT || 'http://localhost:8080';
+const IPFS_API_ENDPOINT =
+  process.env.IPFS_API_ENDPOINT || 'http://localhost:5001';
 const server = new Koa();
 
 server.use(convert(body()));
@@ -57,7 +62,7 @@ server.use(router.middleware());
 // The proxy for ipfs files
 server.use(
   proxy('/_/ipfs/files', {
-    target: 'http://localhost:8080',
+    target: IPFS_FILE_ENDPOINT,
     rewrite: path => path.replace(/\/_\/ipfs\/files/, '/ipfs'),
     changeOrigin: true,
   }),
@@ -66,7 +71,7 @@ server.use(
 // The proxy for ipfs api
 server.use(
   proxy('/_/ipfs/api', {
-    target: 'http://localhost:5001',
+    target: IPFS_API_ENDPOINT,
     rewrite: path => path.replace(/\/_\/ipfs\/api/, ''),
     changeOrigin: true,
   }),
