@@ -1,7 +1,9 @@
 import * as Program from 'commander';
+import * as dotenv from 'dotenv';
 import { default as pkgReader } from './utils/pkgReader';
 import { add, helper, run, upload } from './processor';
 
+dotenv.config();
 const pkgInfo = pkgReader();
 Program.version(pkgInfo.version || '1.0.0');
 

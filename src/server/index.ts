@@ -7,9 +7,7 @@ import * as kstatic from 'koa-static';
 import * as convert from 'koa-convert';
 import { default as proxy } from './proxy';
 import { default as router } from './router';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
 const IPFS_FILE_ENDPOINT =
   process.env.IPFS_FILE_ENDPOINT || 'http://localhost:8080';
 const IPFS_API_ENDPOINT =
