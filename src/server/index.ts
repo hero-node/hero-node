@@ -12,6 +12,7 @@ const IPFS_FILE_ENDPOINT =
   process.env.IPFS_FILE_ENDPOINT || 'http://localhost:8080';
 const IPFS_API_ENDPOINT =
   process.env.IPFS_API_ENDPOINT || 'http://localhost:5001';
+const ETH_SIDE_WEB3 = process.env.ETH_SIDE_WEB3 || 'http://localhost:9002';
 const server = new Koa();
 
 server.use(convert(body()));
@@ -71,6 +72,14 @@ server.use(
   proxy('/_/ipfs/api', {
     target: IPFS_API_ENDPOINT,
     rewrite: path => path.replace(/\/_\/ipfs\/api/, ''),
+    changeOrigin: true,
+  }),
+);
+
+// side chain rpc proxy
+server.use(
+  proxy('/eth/zeus', {
+    target: ETH_SIDE_WEB3,
     changeOrigin: true,
   }),
 );
