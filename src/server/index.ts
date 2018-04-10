@@ -25,39 +25,6 @@ server.use(router.routes());
 server.use(router.allowedMethods());
 server.use(router.middleware());
 
-// server.use(async (ctx, next) => {
-//   if (ctx.path.startsWith('/ipfsapi')) {
-//     const handledPath = ctx.path.replace('/ipfsapi', '');
-//     const query = ctx.querystring;
-//     const ipfsApiUrl = `http://localhost:5001${handledPath}?${query}`;
-//     logger.info(`proxy to ipfs:5001 with ${ipfsApiUrl}`);
-//     const resp = await request(ipfsApiUrl, { timeout: MAX_TIMEOUT });
-//     const data = _.get(resp, 'data').toString();
-//     ctx.body = data;
-//     // } else if (ctx.path.startsWith('/ipfs')) {
-//     //   const ipfsFileUrl = `http://localhost:8080${ctx.path}`;
-//     //   logger.info(`proxy to ipfs:8080 with ${ipfsFileUrl}`);
-//     //   const resp = await request(ipfsFileUrl, {
-//     //     headers: ctx.request.headers,
-//     //     timeout: MAX_TIMEOUT,
-//     //   });
-//     //   const rawFile: Buffer = _.get(resp, 'data');
-//     //   ctx.set(resp.headers);
-//     //   ctx.body = rawFile.toString();
-//   } else if (ctx.path.startsWith('/ethzeus')) {
-//     const ethWeb3ApiUrl = `http://localhost:9002`;
-//     const options: RequestOptions = {
-//       method: ctx.method,
-//       contentType: 'json',
-//       data: ctx.request.fields,
-//     };
-//     const resp = await request(ethWeb3ApiUrl, options);
-//     const data = _.get(resp, 'data').toString();
-//     ctx.body = JSON.parse(data);
-//   }
-//   await next;
-// });
-
 // The proxy for ipfs files
 server.use(
   proxy('/_/ipfs/files', {
