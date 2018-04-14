@@ -3,6 +3,7 @@ import { promisify } from 'util';
 import * as _ from 'lodash';
 import * as Router from 'koa-router';
 import * as IPFS from 'ipfs-api';
+import { default as Web3 } from 'web3';
 
 import { LoggerFactory } from '../utils/logger';
 
@@ -12,6 +13,8 @@ const ipfs = IPFS({
   port: 5001,
   protocol: 'http',
 });
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+
 const logger = LoggerFactory.getLabeledInstance('server', 'router');
 const uploadAsync = promisify(ipfs.files.add);
 const getIpfsNodeId = promisify(ipfs.id);
@@ -72,7 +75,7 @@ router.get('/internal/nodeinfo', async ctx => {
     },
     [],
   );
-  ctx.body = { nodeId, addrs };
+  ctx.body = { nodeId, addrs, eth: web3.eth.defaultAccount };
 });
 
 export default router;
