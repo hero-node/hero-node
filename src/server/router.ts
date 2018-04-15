@@ -75,7 +75,11 @@ router.get('/internal/nodeinfo', async ctx => {
     },
     [],
   );
-  ctx.body = { nodeId, addrs, eth: web3.eth.defaultAccount };
+  ctx.body = {
+    nodeId,
+    addrs,
+    eth: { account: web3.eth.defaultAccount, isSyncing: web3.eth.syncing },
+  };
 });
 
 export default router;
