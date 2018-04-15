@@ -78,7 +78,7 @@ router.get('/internal/nodeinfo', async ctx => {
   ctx.body = {
     nodeId,
     addrs,
-    eth: { account: web3.eth.defaultAccount, isSyncing: web3.eth.syncing },
+    eth: { account: web3.eth.defaultAccount, isSyncing: web3.eth.isSyncing },
   };
 });
 
