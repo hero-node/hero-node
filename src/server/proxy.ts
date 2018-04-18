@@ -18,6 +18,8 @@ export default (context, options) => (ctx, next) => {
   const match = route(context);
   if (!match(ctx.path)) return next();
 
+  console.log(ctx.req);
+
   return new Promise(resolve => {
     ctx.req.oldPath = ctx.req.url;
 
@@ -29,6 +31,8 @@ export default (context, options) => (ctx, next) => {
     );
 
     proxy.web(ctx.req, ctx.res, options, e => {
+      console.log(123, e);
+      console.log(ctx);
       const status = {
         ECONNREFUSED: 503,
         ETIMEOUT: 504,

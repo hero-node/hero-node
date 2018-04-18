@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import * as _ from 'lodash';
 import * as Router from 'koa-router';
 import * as IPFS from 'ipfs-api';
-import { default as Web3 } from 'web3';
+// import * as Web3 from 'web3';
 
 import { LoggerFactory } from '../utils/logger';
 
@@ -13,7 +13,7 @@ const ipfs = IPFS({
   port: 5001,
   protocol: 'http',
 });
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+// const web3 = new Web3.providers.HttpProvider('http://localhost:8545');
 
 const logger = LoggerFactory.getLabeledInstance('server', 'router');
 const uploadAsync = promisify(ipfs.files.add);
@@ -54,6 +54,18 @@ router.post('/api/ipfs/upload/file', async (ctx, next) => {
   const fileContent = await readFileAsync(filePath);
   const resp = await uploadAsync(fileContent);
   ctx.body = resp;
+  await next;
+});
+
+router.get('/api/ipfs/cat', async (ctx, next) => {
+  const ipfsPath = ctx.query.path;
+  try {
+    const resp = await ipfs.files.cat(ipfsPath);
+    ctx.body = resp;
+  } catch (err) {
+    ctx.body = err;
+    ctx.status = 500;
+  }
   await next;
 });
 
