@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import * as _ from 'lodash';
 import * as Router from 'koa-router';
 import * as IPFS from 'ipfs-api';
-// import * as Web3 from 'web3';
+import * as Web3 from 'web3';
 
 import { LoggerFactory } from '../utils/logger';
 
@@ -13,10 +13,11 @@ const ipfs = IPFS({
   port: 5001,
   protocol: 'http',
 });
-// const web3 = new Web3.providers.HttpProvider('http://localhost:8545');
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 const logger = LoggerFactory.getLabeledInstance('server', 'router');
 const uploadAsync = promisify(ipfs.files.add);
+const getFileListAsync = promisify(ipfs.files.ls);
 const getIpfsNodeId = promisify(ipfs.id);
 const getIpfsSwarmPeers = promisify(ipfs.swarm.peers);
 const readFileAsync = promisify(readFile);
@@ -70,7 +71,15 @@ router.get('/api/ipfs/cat', async (ctx, next) => {
 });
 
 router.get('/dashboard', async ctx => {
-  await ctx.render('index');
+  await ctx.redirect('/dashboard/home');
+});
+
+router.get('/dashboard/home', async ctx => {
+  await ctx.render('home');
+});
+
+router.get('/dashboard/files', async ctx => {
+  await ctx.render('files');
 });
 
 router.get('/internal/nodeinfo', async ctx => {
@@ -90,8 +99,16 @@ router.get('/internal/nodeinfo', async ctx => {
   ctx.body = {
     nodeId,
     addrs,
-    eth: { account: web3.eth.defaultAccount, isSyncing: web3.eth.isSyncing },
+    eth: { account: web3.eth.defaultAccount },
   };
+});
+
+router.get('/internal/filelist', async (ctx, next) => {
+  console.log(111);
+  ipfs.refs.local(function(err, files) {
+    console.log(err, files);
+    ctx.body = 123;
+  });
 });
 
 export default router;
