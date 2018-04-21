@@ -4,6 +4,9 @@ import * as _ from 'lodash';
 import * as Router from 'koa-router';
 import * as IPFS from 'ipfs-api';
 import * as Web3 from 'web3';
+import * as geolite2 from 'geolite2';
+import * as maxmind from 'maxmind';
+import * as IP from 'what-is-my-ip-address';
 
 import { LoggerFactory } from '../utils/logger';
 
@@ -82,6 +85,10 @@ router.get('/dashboard/files', async ctx => {
   await ctx.render('files');
 });
 
+router.get('/dashboard/geo', async ctx => {
+  await ctx.render('geo');
+});
+
 router.get('/internal/nodeinfo', async ctx => {
   const [nodeId, peers] = await Promise.all([
     getIpfsNodeId(),
@@ -103,8 +110,40 @@ router.get('/internal/nodeinfo', async ctx => {
   };
 });
 
+router.get('/internal/geo', async (ctx, next) => {
+  const lookup = maxmind.openSync(geolite2.paths.city);
+  const peers = await getIpfsSwarmPeers();
+  const addrs = _.reduce(
+    peers,
+    (accu, peer) => {
+      const addrInfoArr = peer.addr.toString().split('/');
+      accu.push(addrInfoArr[2]);
+      return accu;
+    },
+    [],
+  );
+  const geos = _.reduce(
+    addrs,
+    (accu, el) => {
+      if (el) {
+        const location = _.get(lookup.get(el), 'location');
+        if (location) {
+          _.set(location, 'ip', el);
+          _.set(location, 'weight', Math.sqrt(Math.random() * 10));
+          accu.push(location);
+        }
+      }
+      return accu;
+    },
+    [],
+  );
+  const ip = await IP.v4();
+  const currentLocation = _.get(lookup.get(ip), 'location');
+
+  ctx.body = { currentLocation, geos };
+});
+
 router.get('/internal/filelist', async (ctx, next) => {
-  console.log(111);
   ipfs.refs.local(function(err, files) {
     console.log(err, files);
     ctx.body = 123;

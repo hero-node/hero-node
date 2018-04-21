@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>HeroNode - Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+  <script src="/js/echarts-gl.min.js"></script>
+
+  <link href="/css/keen-dataviz-1.2.1.css" rel="stylesheet">
+  <script src="/js/keen-dataviz-1.2.1.js" type="text/javascript"></script>
+
+  <!-- Dashboard -->
+  <link rel="stylesheet" type="text/css" href="/css/keen-dashboards.css">
+</head>
+
+<body class="keen-dashboard" style="padding-top: 80px;">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/dashboard">Heronode dashboard</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li>
+            <a href="/dashboard/home">Home</a>
+          </li>
+          <li>
+            <a href="/dashboard/nodes">Nodes</a>
+          </li>
+          <li>
+            <a href="/dashboard/files">Files</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-12">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Map
+          </div>
+          <div id="container" class="chart-stage" style="width:100%;height:100%;min-width:300px;min-height:800px;">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="container-fluid">
+    <p class="small text-muted">Built with ♥ by
+      <a href="https://heronode.io/">Hero Node</a>
+    </p>
+  </div>
+
+</body>
+
+<script>
+  $(document).ready(function () {
+    $.getJSON('/internal/geo', function (resp) {
+      const container = echarts.init(document.getElementById('container'));
+      const series = [];
+      // series.push({
+      //   type: 'map',
+      //   map: 'world',
+      //   // 绘制完整尺寸的 echarts 实例
+      //   top: 0, left: 0,
+      //   right: 0, bottom: 0,
+      //   boundingCoords: [[-180, 90], [180, -90]]
+      // });
+
+      const connections = resp.geos.map(function (route) {
+        return [[route.longitude, route.latitude], [resp.currentLocation.longitude, resp.currentLocation.latitude]];
+      });
+      const nodebar = resp.geos.map(function (route) {
+        return [route.longitude, route.latitude, route.weight]
+      });
+      series.push({
+        type: 'lines3D',
+        coordinateSystem: 'globe',
+        blendMode: 'lighter',
+        lineStyle: {
+          width: 1,
+          color: 'rgb(31, 84, 197)',
+          opacity: 0.1
+        },
+        effect: {
+          show: true,
+          trailWidth: 2,
+          trailLength: 0.15,
+          trailOpacity: 0.6,
+          trailColor: 'rgb(121, 155, 226)'
+        },
+        data: connections
+      });
+      series.push({
+        type: 'bar3D',
+        coordinateSystem: 'globe',
+        data: nodebar,
+        barSize: 0.5,
+        shading: 'realistic',
+        minHeight: 0.001,
+        silent: true,
+        itemStyle: {
+          color: 'rgb(00, 82, 204)'
+        }
+      })
+      // series.push({
+      //   type: 'scatter3D',
+      //   coordinateSystem: 'globe',
+      //   blendMode: 'lighter',
+      //   symbolSize: 2,
+      //   itemStyle: {
+      //     color: 'rgb(50, 50, 150)',
+      //     opacity: 0.2
+      //   },
+      //   data: []
+      // });
+      container.setOption({
+        globe: {
+
+          environment: '/img/starfield.jpg',
+
+          heightTexture: '/img/bathymetry_bw_composite_4k.jpg',
+          baseTexture: '/img/world.topo.bathy.200401.jpg',
+          shading: 'realistic',
+          displacementScale: 0.04,
+          realisticMaterial: {
+            roughness: 0.9
+          },
+          postEffect: {
+            enable: true
+          },
+          light: {
+            ambient: {
+              intensity: 2,
+              diffuseIntensity: 0.2
+            },
+            main: {
+              intensity: 1,
+              shadow: true
+            },
+          },
+          viewControl: {
+            autoRotateSpeed: 2,
+            zoomSensitivity: 0,
+            panSensitivity: 0
+          }
+        },
+        series: series
+      });
+    });
+  });
+</script>
+
+</html>
