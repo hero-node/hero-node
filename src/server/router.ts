@@ -89,6 +89,10 @@ router.get('/dashboard/geo', async ctx => {
   await ctx.render('geo');
 });
 
+router.get('/dashboard/node', async ctx => {
+  await ctx.render('nodes');
+});
+
 router.get('/internal/nodeinfo', async ctx => {
   const [nodeId, peers] = await Promise.all([
     getIpfsNodeId(),
@@ -128,6 +132,7 @@ router.get('/internal/geo', async (ctx, next) => {
       if (el) {
         const location = _.get(lookup.get(el), 'location');
         if (location) {
+          _.set(location, 'id', el.split('.').join(''));
           _.set(location, 'ip', el);
           _.set(location, 'weight', Math.sqrt(Math.random() * 10));
           accu.push(location);
@@ -139,6 +144,8 @@ router.get('/internal/geo', async (ctx, next) => {
   );
   const ip = await IP.v4();
   const currentLocation = _.get(lookup.get(ip), 'location');
+  currentLocation.ip = ip;
+  currentLocation.id = ip.split('.').join('');
 
   ctx.body = { currentLocation, geos };
 });
