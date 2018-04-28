@@ -6,7 +6,7 @@ import * as IPFS from 'ipfs-api';
 import * as Web3 from 'web3';
 import * as geolite2 from 'geolite2';
 import * as maxmind from 'maxmind';
-import * as IP from 'what-is-my-ip-address';
+import * as IP from 'public-ip';
 
 import { LoggerFactory } from '../utils/logger';
 

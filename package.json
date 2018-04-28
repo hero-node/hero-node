@@ -32,9 +32,9 @@
     "maxmind": "^2.6.0",
     "moment": "^2.21.0",
     "path-match": "^1.2.4",
+    "public-ip": "^2.4.0",
     "urllib": "^2.26.0",
     "web3": "^1.0.0-beta.33",
-    "what-is-my-ip-address": "^1.0.3",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {

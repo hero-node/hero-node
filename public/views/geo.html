@@ -82,14 +82,6 @@
     $.getJSON('/internal/geo', function (resp) {
       const container = echarts.init(document.getElementById('container'));
       const series = [];
-      // series.push({
-      //   type: 'map',
-      //   map: 'world',
-      //   // 绘制完整尺寸的 echarts 实例
-      //   top: 0, left: 0,
-      //   right: 0, bottom: 0,
-      //   boundingCoords: [[-180, 90], [180, -90]]
-      // });
 
       const connections = resp.geos.map(function (route) {
         return [[route.longitude, route.latitude], [resp.currentLocation.longitude, resp.currentLocation.latitude]];
@@ -126,25 +118,16 @@
         itemStyle: {
           color: 'rgb(00, 82, 204)'
         }
-      })
-      // series.push({
-      //   type: 'scatter3D',
-      //   coordinateSystem: 'globe',
-      //   blendMode: 'lighter',
-      //   symbolSize: 2,
-      //   itemStyle: {
-      //     color: 'rgb(50, 50, 150)',
-      //     opacity: 0.2
-      //   },
-      //   data: []
-      // });
+      });
       container.setOption({
         globe: {
 
-          environment: '/img/starfield.jpg',
+          // environment: '/img/starfield.jpg',
+          environment: '#000',
 
-          heightTexture: '/img/bathymetry_bw_composite_4k.jpg',
+          // heightTexture: '/img/bathymetry_bw_composite_4k.jpg',
           baseTexture: '/img/world.topo.bathy.200401.jpg',
+          // baseTexture: mapChart,
           shading: 'realistic',
           displacementScale: 0.04,
           realisticMaterial: {
