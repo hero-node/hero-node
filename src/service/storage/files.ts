@@ -49,6 +49,18 @@ export default class FileService extends Service {
     }
   }
 
+  public async get(hashId) {
+    const ipfsFileGetAsync = promisify(this.ipfs.files.get);
+    try {
+      const files = await ipfsFileGetAsync(hashId);
+      this.ctx.logger.info(files);
+      return files;
+    } catch (err) {
+      this.ctx.logger.warn(err);
+      return;
+    }
+  }
+
   public async getTopPeers(count?: number) {
     const allPeers = await this.getAvailablePeers();
     const sortedPeerList = _.sortBy(allPeers, (peerInfo: IPeer) => {
