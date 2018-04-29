@@ -89,6 +89,7 @@
       const nodebar = resp.geos.map(function (route) {
         return [route.longitude, route.latitude, route.weight]
       });
+      const hostbar = [[resp.currentLocation.longitude, resp.currentLocation.latitude, resp.currentLocation.weight]];
       series.push({
         type: 'lines3D',
         coordinateSystem: 'globe',
@@ -116,7 +117,18 @@
         minHeight: 0.001,
         silent: true,
         itemStyle: {
-          color: 'rgb(00, 82, 204)'
+          color: 'rgb(129, 200, 208)'
+        }
+      });
+      series.push({
+        type: 'bar3D',
+        coordinateSystem: 'globe',
+        data: hostbar,
+        barSize: 2,
+        shading: 'realistic',
+        silent: true,
+        itemStyle: {
+          color: 'rgb(31, 83, 195)'
         }
       });
       container.setOption({

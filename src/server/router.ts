@@ -164,6 +164,7 @@ router.get('/internal/geo', async (ctx, next) => {
   const currentLocation = _.get(lookup.get(ip), 'location');
   currentLocation.ip = ip;
   currentLocation.id = ip.split('.').join('');
+  currentLocation.weight = Math.sqrt(10);
 
   ctx.body = { currentLocation, geos };
 });
