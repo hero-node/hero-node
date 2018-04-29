@@ -108,11 +108,27 @@ router.get('/internal/nodeinfo', async ctx => {
     },
     [],
   );
+  let gethInfo;
+  try {
+    const gethInfoResp = await request('http://localhost:8545', {
+      method: 'POST',
+      contentType: 'json',
+      data: {
+        jsonrpc: '2.0',
+        method: 'web3_clientVersion',
+        params: [],
+        id: 67,
+      },
+    });
+    gethInfo = JSON.parse(_.get(gethInfoResp, 'data').toString());
+  } catch (err) {
+    logger.error(err);
+  }
 
   ctx.body = {
     nodeId,
     addrs,
-    eth: { node: web3.version.node },
+    eth: gethInfo,
   };
 });
 

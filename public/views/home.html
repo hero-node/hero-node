@@ -78,8 +78,20 @@
           </div>
           <div class="chart-stage">
             <p>
-              <strong>Node Id</strong>
-              <span id="ethinfo"> N/A </span>
+              <strong>Geth Info</strong>
+              <span id="eth_gethinfo"> N/A </span>
+            </p>
+          </div>
+          <div class="chart-stage">
+            <p>
+              <strong>Network Id</strong>
+              <span id="eth_networkid"> N/A </span>
+            </p>
+          </div>
+          <div class="chart-stage">
+            <p>
+              <strong>JSONRPC</strong>
+              <span id="eth_jsonrpc"> N/A </span>
             </p>
           </div>
         </div>
@@ -136,6 +148,9 @@
       $('#ipfs_version').text(resp.nodeId.protocolVersion);
       $('#ipfs_agent').text(resp.nodeId.agentVersion);
       $('#ipfs_publickey').text(resp.nodeId.publicKey);
+      $('#eth_gethinfo').text(resp.eth.result);
+      $('#eth_networkid').text(resp.eth.id);
+      $('#eth_jsonrpc').text(resp.eth.jsonrpc);
       $('#nodelist').append(resp.addrs.reduce(function (accu, el) {
         accu += '<li>';
         accu += el;
