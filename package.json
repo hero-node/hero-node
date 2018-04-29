@@ -33,8 +33,9 @@
     "moment": "^2.21.0",
     "path-match": "^1.2.4",
     "public-ip": "^2.4.0",
-    "urllib": "^2.26.0",
+    "urllib": "^2.27.0",
     "web3": "^1.0.0-beta.33",
+    "web3-eth": "^1.0.0-beta.34",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {

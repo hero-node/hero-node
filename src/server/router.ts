@@ -7,6 +7,7 @@ import * as Web3 from 'web3';
 import * as geolite2 from 'geolite2';
 import * as maxmind from 'maxmind';
 import * as IP from 'public-ip';
+import { request } from 'urllib';
 
 import { LoggerFactory } from '../utils/logger';
 
@@ -16,7 +17,7 @@ const ipfs = IPFS({
   port: 5001,
   protocol: 'http',
 });
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const web3 = new Web3('http://localhost:8545');
 
 const logger = LoggerFactory.getLabeledInstance('server', 'router');
 const uploadAsync = promisify(ipfs.files.add);
@@ -107,10 +108,11 @@ router.get('/internal/nodeinfo', async ctx => {
     },
     [],
   );
+
   ctx.body = {
     nodeId,
     addrs,
-    eth: { account: web3.eth.defaultAccount },
+    eth: { node: web3.version.node },
   };
 });
 
