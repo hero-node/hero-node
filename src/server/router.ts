@@ -132,7 +132,7 @@ router.get('/internal/nodeinfo', async ctx => {
   };
 });
 
-router.get('/internal/geo', async (ctx, next) => {
+router.get('/internal/geo', async ctx => {
   const lookup = maxmind.openSync(geolite2.paths.city);
   const peers = await getIpfsSwarmPeers();
   const addrs = _.reduce(
@@ -169,7 +169,7 @@ router.get('/internal/geo', async (ctx, next) => {
   ctx.body = { currentLocation, geos };
 });
 
-router.get('/internal/filelist', async (ctx, next) => {
+router.get('/internal/filelist', async ctx => {
   ipfs.refs.local(function(err, files) {
     console.log(err, files);
     ctx.body = 123;
