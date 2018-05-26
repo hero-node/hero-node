@@ -79,7 +79,7 @@ router.get('/dashboard', async ctx => {
 });
 
 router.get('/dashboard/home', async ctx => {
-  await ctx.render('home');
+  await ctx.render('new_home');
 });
 
 router.get('/dashboard/files', async ctx => {

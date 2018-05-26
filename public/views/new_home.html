@@ -1,0 +1,199 @@
+{% extends "layout.html" %} {% block main %}
+<div class="ui container">
+  <div class="ui two column grid">
+    <div class="column">
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="right floated meta">Details
+              <i class="angle right icon"></i>
+            </div>
+            <div class="header">IPFS Info</div>
+            <div class="description">
+              <div class="ui list">
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Peer ID: </p>
+                    <span id="ipfs_peerid">N/A</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Agent Version: </p>
+                    <span id="ipfs_agent">N/A</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Protocol Version: </p>
+                    <span id="ipfs_version">N/A</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Public Key: </p>
+                    <span id="ipfs_publickey">N/A</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="right floated meta">Details
+              <i class="angle right icon"></i>
+            </div>
+            <div class="header">ETH Info</div>
+            <div class="description">
+              <div class="ui list">
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Geth Info: </p>
+                    <span id="eth_gethinfo">N/A</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Network ID: </p>
+                    <span id="eth_networkid">N/A</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">JSONRPC</p>
+                    <span id="eth_jsonrpc">N/A</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="right floated meta">Details
+              <i class="angle right icon"></i>
+            </div>
+            <div class="header">BTC Info</div>
+            <div class="description">
+              <div class="ui list">
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Info: </p>
+                    <span id="btc_info">N/A</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="right floated meta">Details
+              <i class="angle right icon"></i>
+            </div>
+            <div class="header">QTUM Info</div>
+            <div class="description">
+              <div class="ui list">
+                <div class="item">
+                  <i class="caret right icon"></i>
+                  <div class="content">
+                    <p class="header">Info: </p>
+                    <span id="qtum_info">N/A</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">Nodes List</div>
+            <div class="description">
+              <table class="ui celled table">
+                <tbody id="nodelist">
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th colspan="3">
+                      <div class="ui right floated pagination menu">
+                        <a class="icon item">
+                          <i class="left chevron icon"></i>
+                        </a>
+                        <a class="item">1</a>
+                        <a class="item">2</a>
+                        <a class="item">3</a>
+                        <a class="item">4</a>
+                        <a class="icon item">
+                          <i class="right chevron icon"></i>
+                        </a>
+                      </div>
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<style type="text/css">
+  .ui.cards>.card {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .ui.cards>.card>.content>.header {
+    color: #3498DB;
+    padding-bottom: 0.5em;
+    border-bottom: solid 1px #3498DB;
+  }
+
+  .ui.cards>.card .meta {
+    color: #3498DB;
+  }
+
+  .ui.cards>.card>.content>.description {
+    min-height: 10em;
+    margin-top: 1em !IMPORTANT;
+  }
+
+  .ui.list>.item>.content {
+    word-break: break-all;
+  }
+</style>
+<script>
+  $(document).ready(function () {
+    const nodeInfo = $.getJSON('/internal/nodeinfo', function (resp) {
+      $('#ipfs_peerid').text(resp.nodeId.id);
+      $('#ipfs_version').text(resp.nodeId.protocolVersion);
+      $('#ipfs_agent').text(resp.nodeId.agentVersion);
+      $('#ipfs_publickey').text(resp.nodeId.publicKey);
+      $('#eth_gethinfo').text(resp.eth.result);
+      $('#eth_networkid').text(resp.eth.id);
+      $('#eth_jsonrpc').text(resp.eth.jsonrpc);
+      $('#nodelist').append(resp.addrs.slice(0, 20).reduce(function (accu, el) {
+        accu += '<tr><td>';
+        accu += el;
+        accu += '</td></tr>'
+        return accu;
+      }, ''));
+    });
+  });
+</script> {% endblock %}
