@@ -60,3 +60,6 @@ typings/
 # version lock files
 package-lock.json
 yarn.lock
+
+# osx related
+.DS_Store

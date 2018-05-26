@@ -185,11 +185,11 @@
       $('#ipfs_version').text(resp.nodeId.protocolVersion);
       $('#ipfs_agent').text(resp.nodeId.agentVersion);
       $('#ipfs_publickey').text(resp.nodeId.publicKey);
-      $('#eth_gethinfo').text(resp.eth.result);
-      $('#eth_networkid').text(resp.eth.id);
-      $('#eth_jsonrpc').text(resp.eth.jsonrpc);
+      // $('#eth_gethinfo').text(resp.eth.result);
+      // $('#eth_networkid').text(resp.eth.id);
+      // $('#eth_jsonrpc').text(resp.eth.jsonrpc);
       $('#nodelist').append(resp.addrs.slice(0, 20).reduce(function (accu, el) {
-        accu += '<tr><td>';
+        accu += '<tr><td><i class="share alternate icon"></i> ';
         accu += el;
         accu += '</td></tr>'
         return accu;
