@@ -87,7 +87,7 @@ router.get('/dashboard/files', async ctx => {
 });
 
 router.get('/dashboard/geo', async ctx => {
-  await ctx.render('geo');
+  await ctx.render('new_geo');
 });
 
 router.get('/dashboard/node', async ctx => {

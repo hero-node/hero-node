@@ -1,0 +1,156 @@
+{% extends "layout.html" %} {% block main %}
+<div class="ui">
+  <canvas id="container" style="width:100%;height:100%;min-width:300;min-height:800;">
+  </canvas>
+</div>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="https://cdn.tangguo360.com/dashboard/js/echarts-gl.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $.getJSON('/internal/geo', function (resp) {
+      // const container = echarts.init(document.getElementById('container'), null);
+      // const series = [];
+
+      // const connections = resp.geos.map(function (route) {
+      //   return [[route.longitude, route.latitude], [resp.currentLocation.longitude, resp.currentLocation.latitude]];
+      // });
+      // const nodebar = resp.geos.map(function (route) {
+      //   return [route.longitude, route.latitude, route.weight]
+      // });
+      // const hostbar = [[resp.currentLocation.longitude, resp.currentLocation.latitude, resp.currentLocation.weight]];
+      // series.push({
+      //   type: 'lines3D',
+      //   coordinateSystem: 'globe',
+      //   blendMode: 'lighter',
+      //   lineStyle: {
+      //     width: 1,
+      //     color: 'rgb(31, 84, 197)',
+      //     opacity: 0.1
+      //   },
+      //   effect: {
+      //     show: true,
+      //     trailWidth: 2,
+      //     trailLength: 0.15,
+      //     trailOpacity: 0.6,
+      //     trailColor: 'rgb(121, 155, 226)'
+      //   },
+      //   data: connections
+      // });
+      // series.push({
+      //   type: 'bar3D',
+      //   coordinateSystem: 'globe',
+      //   data: nodebar,
+      //   barSize: 0.5,
+      //   shading: 'realistic',
+      //   minHeight: 0.001,
+      //   silent: true,
+      //   itemStyle: {
+      //     color: 'rgb(129, 200, 208)'
+      //   }
+      // });
+      // series.push({
+      //   type: 'bar3D',
+      //   coordinateSystem: 'globe',
+      //   data: hostbar,
+      //   barSize: 2,
+      //   shading: 'realistic',
+      //   silent: true,
+      //   itemStyle: {
+      //     color: 'rgb(31, 83, 195)'
+      //   }
+      // });
+      let worldMap = echarts.init(document.createElement('canvas'), null, {
+        width: 4000,
+        height: 2000
+      })
+
+      worldMap.setOption({
+        series: [{
+          type: 'map',
+          map: 'world',
+          name: 'world_map',
+          itemStyle: {
+            areaColor: 'rgba(255, 253, 250, 0)', //地图区域颜色#146d97
+            borderColor: 'rgba(255, 253, 250, 1)', //地图区域边线颜色
+          },
+          // 绘制完整尺寸的 echarts 实例
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          silent: false,
+          boundingCoords: [
+            [-180, 90],
+            [180, -90]
+          ]
+        }]
+      });
+
+
+      let global = echarts.init(document.getElementById('container'));
+      let option = {
+        globe: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          baseTexture: worldMap, //地球组件纹理
+          shading: 'color',
+          light: {
+            main: {
+              color: '#fff',
+              intensity: 0, //主光源强度
+            },
+            ambient: { //环境光
+              color: '#485764',
+              intensity: 0
+            }
+          },
+          viewControl: {
+            zoomSensitivity: 0,
+            autoRotate: false,
+            rotateSensitivity: 2,
+            rotateMouseButton: 'left'
+          }
+        }
+      }
+      global.setOption(option);
+
+
+      // globe: {
+
+      //   // environment: '/img/starfield.jpg',
+      //   environment: '#000',
+
+      //   // heightTexture: '/img/bathymetry_bw_composite_4k.jpg',
+      //   baseTexture: '/img/world.topo.bathy.200401.jpg',
+      //   // baseTexture: mapChart,
+      //   shading: 'realistic',
+      //   displacementScale: 0.04,
+      //   realisticMaterial: {
+      //     roughness: 0.9
+      //   },
+      //   postEffect: {
+      //     enable: true
+      //   },
+      //   light: {
+      //     ambient: {
+      //       intensity: 2,
+      //       diffuseIntensity: 0.2
+      //     },
+      //     main: {
+      //       intensity: 1,
+      //       shadow: true
+      //     },
+      //   },
+      //   viewControl: {
+      //     autoRotateSpeed: 2,
+      //     zoomSensitivity: 0,
+      //     panSensitivity: 0
+      //   }
+      // },
+      // series: series
+    });
+  });
+</script> {% endblock %}
